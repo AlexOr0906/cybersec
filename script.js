@@ -23,7 +23,15 @@ const scenarios = [
     type: 'email',
     from: 'support@vk-security.net',
     subject: 'Ваш аккаунт ВКонтакте будет заблокирован!',
-    body: `Уважаемый пользователь!\n\nНаша система безопасности зафиксировала подозрительную активность в вашем аккаунте. Для предотвращения блокировки необходимо подтвердить личность в течение <span class="highlight-red">24 ЧАСОВ</span>.\n\nНажмите на ссылку ниже для подтверждения:\n<span class="highlight-red">http://vk-acc0unt-verify.ru/login</span>\n\nС уважением,\nСлужба безопасности ВКонтакте`,
+    body: `Уважаемый пользователь!
+
+Наша система безопасности зафиксировала подозрительную активность в вашем аккаунте. Для предотвращения блокировки необходимо подтвердить личность в течение <span class="highlight-red">24 ЧАСОВ</span>.
+
+Нажмите на ссылку ниже для подтверждения:
+<span class="highlight-red">http://vk-acc0unt-verify.ru/login</span>
+
+С уважением,
+Служба безопасности ВКонтакте`,
     question: 'Что ты сделаешь с этим письмом?',
     options: [
       'Перейду по ссылке и введу свои данные',
@@ -43,7 +51,11 @@ const scenarios = [
     type: 'sms',
     from: '+7 (900) 123-45-67',
     subject: 'СМС-сообщение',
-    body: `Мама, это я! Потерял телефон, пишу с чужого номера.\n\nСрочно нужно <span class="highlight-red">5 000 рублей</span> — попал в неприятную ситуацию. Переведи на карту <span class="highlight-red">2200 **** **** 8821</span>.\n\nВсё объясню потом, НЕ ЗВОНИ на мой номер — телефон у чужих людей.`,
+    body: `Мама, это я! Потерял телефон, пишу с чужого номера.
+
+Срочно нужно <span class="highlight-red">5 000 рублей</span> — попал в неприятную ситуацию. Переведи на карту <span class="highlight-red">2200 **** **** 8821</span>.
+
+Всё объясню потом, НЕ ЗВОНИ на мой номер — телефон у чужих людей.`,
     question: 'Ты мама. Что делаешь?',
     options: [
       'Немедленно перевожу деньги — ребёнок в беде',
@@ -63,7 +75,14 @@ const scenarios = [
     type: 'browser',
     from: 'Всплывающее окно в браузере',
     subject: 'Системное предупреждение',
-    body: `⚠️ ВНИМАНИЕ! ВАШ КОМПЬЮТЕР ЗАРАЖЁН!\n\nОбнаружено <span class="highlight-red">5 вирусов</span>, которые похищают ваши банковские данные прямо сейчас.\n\nДля немедленного удаления угроз:\n📞 Позвоните в техподдержку: <span class="highlight-yellow">8-800-555-0199</span>\n\n<span class="highlight-red">НЕ ЗАКРЫВАЙТЕ это окно!</span> Это может привести к полной потере данных.`,
+    body: `⚠️ ВНИМАНИЕ! ВАШ КОМПЬЮТЕР ЗАРАЖЁН!
+
+Обнаружено <span class="highlight-red">5 вирусов</span>, которые похищают ваши банковские данные прямо сейчас.
+
+Для немедленного удаления угроз:
+📞 Позвоните в техподдержку: <span class="highlight-yellow">8-800-555-0199</span>
+
+<span class="highlight-red">НЕ ЗАКРЫВАЙТЕ это окно!</span> Это может привести к полной потере данных.`,
     question: 'Ты видишь такое окно. Твои действия?',
     options: [
       'Звоню по указанному номеру — нужно срочно спасать данные',
@@ -83,7 +102,16 @@ const scenarios = [
     type: 'email',
     from: 'noreply@gosuslugi-bonus.ru',
     subject: 'Вам начислена выплата 15 480 руб.',
-    body: `Уважаемый гражданин!\n\nПо результатам проверки вам полагается <span class="highlight-red">социальная выплата в размере 15 480 рублей</span>.\n\nДля получения выплаты необходимо:\n1. Пройти по ссылке: <span class="highlight-red">gosuslugi-bonus.ru/get</span>\n2. Ввести данные банковской карты для зачисления\n3. Оплатить комиссию за обработку: <span class="highlight-red">450 рублей</span>\n\nСрок действия предложения: 48 часов`,
+    body: `Уважаемый гражданин!
+
+По результатам проверки вам полагается <span class="highlight-red">социальная выплата в размере 15 480 рублей</span>.
+
+Для получения выплаты необходимо:
+1. Пройти по ссылке: <span class="highlight-red">gosuslugi-bonus.ru/get</span>
+2. Ввести данные банковской карты для зачисления
+3. Оплатить комиссию за обработку: <span class="highlight-red">450 рублей</span>
+
+Срок действия предложения: 48 часов`,
     question: 'Как расцениваешь это письмо?',
     options: [
       'Оплачу комиссию — 450 рублей небольшие деньги ради 15 000',
@@ -103,7 +131,11 @@ const scenarios = [
     type: 'chat',
     from: 'Незнакомец в игровом чате',
     subject: 'Сообщение в игре',
-    body: `[PRO_player_777]: эй, тебе повезло! я сотрудник игры, раздаём скины топ игрокам\n\n[PRO_player_777]: зайди на <span class="highlight-red">free-skins-cs.net</span> и войди через стим — там твой приз\n\n[PRO_player_777]: только побыстрее, акция до конца дня. уже 2000 игроков получили`,
+    body: `[PRO_player_777]: эй, тебе повезло! я сотрудник игры, раздаём скины топ игрокам
+
+[PRO_player_777]: зайди на <span class="highlight-red">free-skins-cs.net</span> и войди через стим — там твой приз
+
+[PRO_player_777]: только побыстрее, акция до конца дня. уже 2000 игроков получили`,
     question: 'Что делаешь?',
     options: [
       'Захожу на сайт — хочу получить скины',
@@ -116,70 +148,69 @@ const scenarios = [
       title: '✓ Правильно! Это стим-фишинг.',
       text: 'Никакая игровая компания не раздаёт призы случайным игрокам через личные сообщения. Сайт free-skins-cs.net создан для кражи аккаунтов Steam: он имитирует страницу входа, и если ввести логин и пароль — аккаунт со всеми скинами уйдёт мошенникам. Даже просто открыть подозрительный сайт небезопасно.',
       wrongTitle: '✗ Это кража аккаунта!',
-      wrongText: 'Бесплатный сыр бывает только в мышеловке. Этот сайт скопирует твою страницу входа в Steam. Настоящие раздачи скинов проходят только внутри официального клиента или на официальном сайте разработчика.'
+      wrongText: 'Сайт имитирует страницу входа в Steam, чтобы украсть твои логин и пароль. Фраза «2000 игроков уже получили» создаёт ложное социальное давление. Игровые компании никогда не раздают призы через личный чат — правильное действие — просто проигнорировать.'
     }
   }
 ];
 
 let simIndex = 0;
 let simAnswered = false;
-let simScore = 0;
 
 function initSimulator() {
   simIndex = 0;
-  simAnswered = false;
-  simScore = 0;
-  renderSteps();
   renderSim();
 }
 
-function renderSteps() {
-  const container = document.getElementById('simSteps');
-  if (!container) return;
-  container.innerHTML = scenarios.map((_, i) => {
-    let cls = 'sim-step-dot';
-    if (i < simIndex) cls += ' done';
-    else if (i === simIndex) cls += ' active';
-    return `<div class="${cls}"></div>`;
-  }).join('');
-}
-
 function renderSim() {
-  renderSteps();
+  const progress = document.getElementById('simProgress');
+  progress.innerHTML = scenarios.map((_, i) =>
+    `<div class="sim-dot ${i < simIndex ? 'done' : i === simIndex ? 'current' : ''}"></div>`
+  ).join('');
+
   if (simIndex >= scenarios.length) {
-    showSimResult();
+    document.getElementById('simContent').innerHTML = `
+      <div style="text-align:center;padding:3rem 1rem">
+        <div style="font-size:3rem;margin-bottom:1rem">🛡️</div>
+        <div class="section-title" style="margin-bottom:0.5rem">Симулятор пройден!</div>
+        <p style="color:var(--text-dim);margin-bottom:2rem">Теперь ты знаешь основные схемы мошенников. Готов проверить знания в финальном тесте?</p>
+        <button class="btn-primary" onclick="showSection('quiz')">Пройти тест →</button>
+      </div>`;
     return;
   }
-  simAnswered = false;
+
   const s = scenarios[simIndex];
-  const typeLabels = { email: '📧 Электронное письмо', sms: '💬 SMS-сообщение', browser: '🌐 Браузер', chat: '🎮 Игровой чат' };
+  simAnswered = false;
+
+  const icons = { email: '📧', sms: '💬', browser: '🌐', chat: '🎮' };
+  const labels = { email: 'Электронное письмо', sms: 'СМС-сообщение', browser: 'Браузер', chat: 'Игровой чат' };
+
   document.getElementById('simContent').innerHTML = `
     <div class="sim-scenario">
       <div class="sim-header">
         <div class="sim-header-dot dot-red"></div>
         <div class="sim-header-dot dot-yellow"></div>
         <div class="sim-header-dot dot-green"></div>
-        <span style="margin-left:0.5rem">${typeLabels[s.type] || s.type} · ${s.from}</span>
+        <span>${icons[s.type]} ${labels[s.type]}</span>
+        <span style="margin-left:auto;color:var(--accent3);font-size:0.78rem;">От: ${s.from}</span>
       </div>
       <div class="sim-body">
         <div class="sim-label">Тема</div>
-        <div style="font-weight:600;margin-bottom:1rem;font-size:0.92rem;color:var(--text)">${s.subject}</div>
-        <div class="sim-label">Сообщение</div>
+        <div style="font-weight:600;margin-bottom:1rem;font-size:0.95rem">${s.subject}</div>
         <div class="sim-message">${s.body}</div>
         <div class="sim-counter">Ситуация ${simIndex + 1} из ${scenarios.length}</div>
         <div class="sim-question">${s.question}</div>
         <div class="sim-options">
           ${s.options.map((opt, i) => `
-            <button class="sim-option" onclick="answerSim(${i})">
+            <button class="sim-option" onclick="answerSim(${i})" id="simOpt${i}">
               <span class="option-letter">${String.fromCharCode(65+i)}</span>
               ${opt}
             </button>`).join('')}
         </div>
         <div class="sim-feedback" id="simFeedback"></div>
-        <div class="sim-nav" id="simNav" style="display:none">
-          <button class="btn-primary" onclick="nextSim()">${simIndex < scenarios.length - 1 ? 'Следующая ситуация →' : 'Завершить симулятор →'}</button>
-        </div>
       </div>
+    </div>
+    <div class="sim-nav" id="simNav" style="display:none">
+      <button class="btn-primary" onclick="nextSim()">${simIndex < scenarios.length - 1 ? 'Следующая ситуация →' : 'Завершить симулятор →'}</button>
     </div>`;
 }
 
@@ -188,7 +219,6 @@ function answerSim(idx) {
   simAnswered = true;
   const s = scenarios[simIndex];
   const isCorrect = idx === s.correct;
-  if (isCorrect) simScore++;
 
   document.querySelectorAll('.sim-option').forEach((btn, i) => {
     btn.disabled = true;
@@ -200,8 +230,8 @@ function answerSim(idx) {
   fb.classList.add('visible');
   fb.classList.add(isCorrect ? 'correct-fb' : 'wrong-fb');
   fb.innerHTML = `
-    <div class="sim-feedback-title" style="color:${isCorrect ? 'var(--accent-green)' : 'var(--accent-2)'}">${isCorrect ? s.feedback.title : s.feedback.wrongTitle}</div>
-    <div style="color:var(--text-mid);margin-top:0.4rem">${isCorrect ? s.feedback.text : s.feedback.wrongText}</div>`;
+    <div class="sim-feedback-title" style="color:${isCorrect ? '#28c840' : 'var(--accent2)'}">${isCorrect ? s.feedback.title : s.feedback.wrongTitle}</div>
+    <div style="color:var(--text-dim)">${isCorrect ? s.feedback.text : s.feedback.wrongText}</div>`;
 
   document.getElementById('simNav').style.display = 'flex';
 }
@@ -211,40 +241,18 @@ function nextSim() {
   renderSim();
 }
 
-function showSimResult() {
-  const pct = Math.round(simScore / scenarios.length * 100);
-  let emoji, title, color;
-  if (pct >= 80) { emoji = '🏆'; title = 'Отличная защита!'; color = 'var(--accent-green)'; }
-  else if (pct >= 60) { emoji = '👍'; title = 'Хороший уровень'; color = 'var(--accent)'; }
-  else { emoji = '⚠️'; title = 'Нужна практика'; color = 'var(--accent-warm)'; }
-
-  document.getElementById('simContent').innerHTML = `
-    <div class="sim-result">
-      <div style="font-size:3rem;margin-bottom:1rem">${emoji}</div>
-      <div class="sim-result-score" style="color:${color}">${simScore}/${scenarios.length}</div>
-      <div style="font-family:'Unbounded',sans-serif;font-size:1.2rem;font-weight:700;margin:0.5rem 0;color:var(--text)">${title}</div>
-      <div style="color:var(--text-mid);margin:0.8rem 0 2rem;font-size:0.92rem">Ты правильно распознал ${simScore} из ${scenarios.length} угроз</div>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-        <button class="btn-primary" onclick="initSimulator()">Пройти снова</button>
-        <button class="btn-secondary" onclick="showSection('quiz')">Перейти к тесту</button>
-      </div>
-    </div>`;
-
-  document.getElementById('simSteps').innerHTML = scenarios.map(() => `<div class="sim-step-dot done"></div>`).join('');
-}
-
 // ===== QUIZ =====
 const questions = [
   { q: 'Ты получил письмо от «Сбербанка» с просьбой подтвердить данные карты по ссылке. Адрес отправителя: sber-online@gmail.com. Что это?', opts: ['Обычное письмо от банка', 'Фишинговая атака', 'Техническое уведомление', 'Реклама'], correct: 1 },
   { q: 'Какой пароль наиболее безопасный?', opts: ['qwerty123', 'дата рождения', 'KiberZaschita#2024!', 'имя + год'], correct: 2 },
   { q: 'Что такое двухфакторная аутентификация?', opts: ['Два разных пароля', 'Подтверждение входа через второй способ (SMS, приложение)', 'Антивирус нового поколения', 'Шифрование файлов'], correct: 1 },
-  { q: 'Незнакомый человек онлайн предлагает бесплатные игровые ресурсы, нужно только войти через его сайт. Это:', opts: ['Честный подарок', 'Попытка угона аккаунта', 'Маркетинговая акция', 'Технический сбой'], correct: 1 },
+  { q: 'Незнакомый человек онлайн предлагает бесплатные игровые ресурсы, нужно только войти через его сайт. Это:',  opts: ['Честный подарок', 'Попытка угона аккаунта', 'Маркетинговая акция', 'Технический сбой'], correct: 1 },
   { q: 'Ты скачал программу с торрента. Антивирус молчит. Это безопасно?', opts: ['Да, если антивирус не среагировал', 'Нет — пиратский софт часто содержит вредоносы, не все из которых обнаруживаются', 'Безопасно если программа популярная', 'Зависит от операционной системы'], correct: 1 },
   { q: 'Что значит «https» в начале адреса сайта?', opts: ['Сайт создан в России', 'Соединение зашифровано — данные труднее перехватить', 'Сайт проверен государством', 'Сайт не содержит вирусов'], correct: 1 },
-  { q: 'Тебе позвонили из «службы безопасности банка» и просят назвать код из SMS. Ты:', opts: ['Называю — они же из банка', 'Кладу трубку и перезваниваю в банк сам по номеру с карты', 'Называю только последние цифры', 'Прошу подождать и советуюсь с родителями'], correct: 1 },
+  { q: 'Тебе позвонили из «службы безопасности банка» и просят назвать код из SMS. Ты:',  opts: ['Называю — они же из банка', 'Кладу трубку и перезваниваю в банк сам по номеру с карты', 'Называю только последние цифры', 'Прошу подождать и советуюсь с родителями'], correct: 1 },
   { q: 'Как мошенники используют искусственный интеллект?', opts: ['Только для взлома сайтов', 'Для создания дипфейков, клонирования голосов, персонализированного фишинга', 'ИИ не используется в мошенничестве', 'Только для рассылки спама'], correct: 1 },
   { q: 'Что нужно сделать если ты стал жертвой кибермошенников?', opts: ['Ничего, всё равно не помогут', 'Сообщить в банк и заблокировать карту, обратиться в полицию', 'Попытаться вернуть деньги самостоятельно', 'Рассказать только друзьям'], correct: 1 },
-  { q: 'Публичный Wi-Fi в кафе. Ты можешь безопасно:', opts: ['Вводить пароли и данные карты', 'Делать банковские переводы', 'Просматривать новости и общаться (без ввода паролей)', 'Всё вышеперечисленное'], correct: 2 }
+  { q: 'Публичный Wi-Fi в кафе. Ты можешь безопасно:',  opts: ['Вводить пароли и данные карты', 'Делать банковские переводы', 'Просматривать новости и общаться (без ввода паролей)', 'Всё вышеперечисленное'], correct: 2 }
 ];
 
 let quizAnswers = new Array(questions.length).fill(null);
@@ -280,7 +288,6 @@ function selectQuiz(qi, oi) {
   quizAnswers[qi] = oi;
   document.querySelectorAll(`[id^="qopt${qi}_"]`).forEach(btn => btn.classList.remove('selected'));
   document.getElementById(`qopt${qi}_${oi}`).classList.add('selected');
-  document.getElementById(`qcard${qi}`).classList.add('qa');
 }
 
 function submitQuiz() {
@@ -309,10 +316,10 @@ function submitQuiz() {
 function showResults(score) {
   const pct = Math.round(score / questions.length * 100);
   let title, desc, level;
-  if (pct >= 90) { title = 'Эксперт по кибербезопасности!'; desc = 'Отличный результат. Ты отлично разбираешься в киберугрозах и знаешь как от них защититься. Поделись этими знаниями с друзьями и семьёй!'; level = 'var(--accent-green)'; }
-  else if (pct >= 70) { title = 'Хороший уровень защиты'; desc = 'Ты знаешь основные угрозы, но есть пробелы. Перечитай раздел «Угрозы» и обрати особое внимание на темы, в которых ошибся.'; level = 'var(--accent)'; }
-  else if (pct >= 50) { title = 'Средний уровень'; desc = 'Базовые знания есть, но мошенники могут тебя перехитрить. Пройди симулятор заново и изучи карточки угроз подробнее.'; level = 'var(--accent-warm)'; }
-  else { title = 'Нужно подтянуть знания'; desc = 'Не расстраивайся — ты только начинаешь. Изучи все разделы сайта и вернись к тесту. Знания — лучшая защита!'; level = 'var(--accent-2)'; }
+  if (pct >= 90) { title = 'Эксперт по кибербезопасности!'; desc = 'Отличный результат. Ты отлично разбираешься в киберугрозах и знаешь как от них защититься. Поделись этими знаниями с друзьями и семьёй!'; level = 'var(--accent)'; }
+  else if (pct >= 70) { title = 'Хороший уровень защиты'; desc = 'Ты знаешь основные угрозы, но есть пробелы. Перечитай раздел «Угрозы» и обрати особое внимание на темы, в которых ошибся.'; level = '#7b61ff'; }
+  else if (pct >= 50) { title = 'Средний уровень'; desc = 'Базовые знания есть, но мошенники могут тебя перехитрить. Пройди симулятор заново и изучи карточки угроз подробнее.'; level = '#ffb100'; }
+  else { title = 'Нужно подтянуть знания'; desc = 'Не расстраивайся — ты только начинаешь. Изучи все разделы сайта и вернись к тесту. Знания — лучшая защита!'; level = 'var(--accent2)'; }
 
   const tips = [
     { icon: '🔑', text: 'Используй уникальные пароли для каждого сервиса — менеджер паролей поможет их запомнить' },
@@ -325,8 +332,8 @@ function showResults(score) {
   const container = document.getElementById('quizContainer');
   container.innerHTML = `
     <div class="results-box">
-      <div class="results-score" style="border-color:${level};box-shadow:0 0 40px ${level.includes('var') ? 'rgba(0,200,255,0.25)' : level+'40'}">
-        <span class="score-num" style="color:${level};text-shadow:0 0 30px ${level.includes('var') ? 'rgba(0,200,255,0.5)' : level+'80'}">${score}</span>
+      <div class="results-score" style="border-color:${level};box-shadow:0 0 30px ${level}40">
+        <span class="score-num" style="color:${level}">${score}</span>
         <span class="score-total">из ${questions.length}</span>
       </div>
       <div class="results-title">${title}</div>
@@ -335,7 +342,7 @@ function showResults(score) {
         <h4>Ключевые правила защиты</h4>
         ${tips.map(t => `<div class="tip-item"><span class="tip-icon">${t.icon}</span><span>${t.text}</span></div>`).join('')}
       </div>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <div class="btn-group">
         <button class="btn-primary" onclick="restartQuiz()">Пройти тест заново</button>
         <button class="btn-secondary" onclick="showSection('threats')">Повторить теорию</button>
       </div>
@@ -348,6 +355,7 @@ function restartQuiz() {
   renderQuiz();
 }
 
+// Инициализация при загрузке страницы
 window.addEventListener('DOMContentLoaded', function() {
   initSimulator();
   initQuiz();

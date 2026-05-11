@@ -3,17 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>КиберЩит — Знай угрозу, защити себя</title>
+  <title>Кибербезопасность: знай и защищайся</title>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">
-    <div class="nav-logo-icon">🛡</div>
-    КиберЩит
-  </div>
+  <div class="nav-logo">КиберЩит</div>
   <div class="nav-links">
     <button class="active" onclick="showSection('home')">Главная</button>
     <button onclick="showSection('threats')">Угрозы</button>
@@ -26,7 +23,7 @@
 <div id="home" class="section active">
   <div class="hero">
     <div class="hero-badge">Проект по кибербезопасности · Гимназия №26</div>
-    <h1>Знай угрозу —<br><span class="accent-word">защити себя</span></h1>
+    <h1>Знай угрозу — защити себя</h1>
     <p>Каждый день тысячи школьников становятся жертвами киберпреступников. Узнай как они действуют — и не попадись.</p>
     <div class="hero-stats">
       <div class="stat">
@@ -60,12 +57,12 @@
       <span class="danger-tag danger-high">Высокий риск</span>
       <div class="threat-title">Фишинг</div>
       <div class="threat-short">Мошеннические письма и сайты, которые маскируются под настоящие, чтобы украсть твои данные.</div>
-      <div class="threat-expand">Подробнее</div>
+      <div class="threat-expand">Подробнее →</div>
       <div class="threat-details">
         <h4>Как распознать</h4>
         <ul>
           <li>Срочность: «Аккаунт заблокируют через 24 часа»</li>
-          <li>Подозрительный адрес: sber-online@gmail.com вместо sberbank.ru</li>
+          <li>Подозрительный адрес отправителя: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="63100106114e01020d08230e020a0f4d1116">[email&#160;protected]</a> вместо sberbank.ru</li>
           <li>Ссылки ведут на странные домены (goog1e.com, vk-login.net)</li>
           <li>Просят ввести пароль или данные карты</li>
         </ul>
@@ -84,7 +81,7 @@
       <span class="danger-tag danger-high">Высокий риск</span>
       <div class="threat-title">Вредоносные программы</div>
       <div class="threat-short">Вирусы, трояны и шпионское ПО, которые проникают в устройство и крадут данные или деньги.</div>
-      <div class="threat-expand">Подробнее</div>
+      <div class="threat-expand">Подробнее →</div>
       <div class="threat-details">
         <h4>Типы вредоносов</h4>
         <ul>
@@ -108,7 +105,7 @@
       <span class="danger-tag danger-high">Высокий риск</span>
       <div class="threat-title">Социальная инженерия</div>
       <div class="threat-short">Психологические манипуляции, которые вынуждают тебя самого раскрыть секретную информацию.</div>
-      <div class="threat-expand">Подробнее</div>
+      <div class="threat-expand">Подробнее →</div>
       <div class="threat-details">
         <h4>Популярные схемы</h4>
         <ul>
@@ -132,7 +129,7 @@
       <span class="danger-tag danger-med">Средний риск</span>
       <div class="threat-title">DDoS-атаки</div>
       <div class="threat-short">Перегрузка серверов потоком запросов, которая выводит сайты и сервисы из строя.</div>
-      <div class="threat-expand">Подробнее</div>
+      <div class="threat-expand">Подробнее →</div>
       <div class="threat-details">
         <h4>Как это работает</h4>
         <ul>
@@ -154,7 +151,7 @@
       <span class="danger-tag danger-high">Высокий риск</span>
       <div class="threat-title">Кража личных данных</div>
       <div class="threat-short">Преступники собирают твои личные данные, чтобы совершать преступления от твоего имени.</div>
-      <div class="threat-expand">Подробнее</div>
+      <div class="threat-expand">Подробнее →</div>
       <div class="threat-details">
         <h4>Что крадут</h4>
         <ul>
@@ -175,10 +172,10 @@
 
     <div class="threat-card" onclick="toggleCard(this)">
       <span class="threat-icon">🤖</span>
-      <span class="danger-tag danger-new">Новая угроза</span>
+      <span class="danger-tag danger-high">Новая угроза</span>
       <div class="threat-title">ИИ в руках мошенников</div>
       <div class="threat-short">Искусственный интеллект позволяет создавать убедительные дипфейки, голосовые клоны и фишинг нового уровня.</div>
-      <div class="threat-expand">Подробнее</div>
+      <div class="threat-expand">Подробнее →</div>
       <div class="threat-details">
         <h4>Как мошенники используют ИИ</h4>
         <ul>
@@ -207,7 +204,7 @@
   <div class="section-title">Симулятор угроз</div>
   <div class="section-sub">Проверь — ты бы попался? Разбери реальные схемы мошенников</div>
   <div class="sim-container">
-    <div class="sim-steps" id="simSteps"></div>
+    <div class="sim-progress" id="simProgress"></div>
     <div id="simContent"></div>
   </div>
 </div>
