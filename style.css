@@ -1,26 +1,28 @@
 /* ============================================================
-   КиберЩит — стили сайта
-   Палитра: глубокий тёплый синий с градиентом
-   Навигация: крупный шрифт (1.05rem), увеличенная высота
+   КиберЩит — стили сайта (светлая тема)
+   Палитра: мягкие сине-голубые тона, тёмный читаемый текст
    ============================================================ */
 
 :root {
-  /* Базовая палитра — более позитивная, тёмно-синяя с тёплыми акцентами */
-  --bg-1: #1a2d52;        /* основной фон сверху */
-  --bg-2: #0f1f3a;        /* фон по центру (чуть темнее) */
-  --bg-3: #1a2d52;        /* основной фон снизу */
-  --card: #1e3258;        /* карточки */
-  --card-2: #284070;      /* карточки активные/наведённые */
-  --accent: #4dd9ff;      /* основной голубой */
-  --accent-2: #ff5e87;    /* розово-красный */
-  --accent-3: #9b85ff;    /* фиолетовый */
-  --accent-warm: #ffc857; /* тёплый жёлтый (для бейджей) */
-  --text: #f0f3ff;
-  --text-dim: #a0b3d4;
-  --border: rgba(77, 217, 255, 0.22);
-  --border-2: rgba(77, 217, 255, 0.4);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --glow: 0 0 28px rgba(77, 217, 255, 0.22);
+  /* Светлая палитра */
+  --bg-1: #eaf2fb;        /* верх фона — очень светлый сине-голубой */
+  --bg-2: #f5f9fd;        /* центр — почти белый */
+  --bg-3: #e3edf8;        /* низ — чуть насыщеннее */
+  --card: #ffffff;        /* белые карточки */
+  --card-2: #f0f6fc;      /* карточки наведённые */
+  --accent: #0066cc;      /* насыщенный синий — основной */
+  --accent-soft: #4d94e5; /* мягкий синий */
+  --accent-2: #e63946;    /* красный — для опасности */
+  --accent-3: #6c47d6;    /* фиолетовый */
+  --accent-warm: #f0a500; /* тёплый жёлтый */
+  --accent-green: #2a9d4a;/* зелёный — правильные ответы */
+  --text: #1a2540;        /* основной тёмный текст */
+  --text-dim: #5c6f94;    /* приглушённый текст */
+  --border: #d4e1f0;      /* мягкие границы */
+  --border-2: #b8cce4;    /* выраженные границы */
+  --shadow-sm: 0 2px 8px rgba(0, 102, 204, 0.06);
+  --shadow-md: 0 6px 22px rgba(0, 102, 204, 0.1);
+  --shadow-lg: 0 12px 40px rgba(0, 102, 204, 0.14);
 }
 
 * {
@@ -41,14 +43,14 @@ body {
   line-height: 1.6;
 }
 
-/* Лёгкая сетка поверх фона — даёт «технологичный» характер, но не мрачный */
+/* Лёгкая декоративная сетка */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(77, 217, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(77, 217, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(0, 102, 204, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 102, 204, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: 0;
@@ -61,7 +63,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(15, 31, 58, 0.92);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
@@ -70,6 +72,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   height: 76px;
+  box-shadow: var(--shadow-sm);
 }
 
 .nav-logo {
@@ -81,7 +84,6 @@ nav {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  text-shadow: 0 0 18px rgba(77, 217, 255, 0.35);
 }
 
 .nav-logo::before {
@@ -110,7 +112,7 @@ nav {
 .nav-links button:hover,
 .nav-links button.active {
   color: var(--accent);
-  background: rgba(77, 217, 255, 0.12);
+  background: rgba(0, 102, 204, 0.08);
 }
 
 /* ============================================================
@@ -133,10 +135,7 @@ nav {
   font-size: 1.7rem;
   font-weight: 700;
   margin-bottom: 0.4rem;
-  background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text);
 }
 
 .section-sub {
@@ -155,8 +154,8 @@ nav {
 
 .hero-badge {
   display: inline-block;
-  background: rgba(77, 217, 255, 0.1);
-  border: 1px solid rgba(77, 217, 255, 0.28);
+  background: rgba(0, 102, 204, 0.08);
+  border: 1px solid rgba(0, 102, 204, 0.25);
   border-radius: 100px;
   padding: 0.4rem 1.1rem;
   font-size: 0.78rem;
@@ -173,7 +172,7 @@ nav {
   font-weight: 900;
   line-height: 1.08;
   margin-bottom: 1.3rem;
-  background: linear-gradient(130deg, #fff 0%, var(--accent) 50%, var(--accent-3) 100%);
+  background: linear-gradient(130deg, var(--text) 0%, var(--accent) 50%, var(--accent-3) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -207,7 +206,7 @@ nav {
   top: 22%;
   height: 56%;
   width: 1px;
-  background: var(--border);
+  background: var(--border-2);
 }
 
 .stat-num {
@@ -252,23 +251,25 @@ nav {
 
 .btn-primary {
   background: var(--accent);
-  color: #0f1f3a;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 102, 204, 0.25);
 }
 
 .btn-primary:hover {
-  background: #6de4ff;
+  background: #0055b3;
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(77, 217, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 102, 204, 0.35);
 }
 
 .btn-secondary {
-  background: transparent;
+  background: #fff;
   color: var(--accent);
   border: 1px solid var(--border-2);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:hover {
-  background: rgba(77, 217, 255, 0.08);
+  background: rgba(0, 102, 204, 0.05);
   border-color: var(--accent);
   transform: translateY(-2px);
 }
@@ -298,19 +299,20 @@ nav {
   cursor: pointer;
   transition: all 0.28s;
   position: relative;
+  box-shadow: var(--shadow-sm);
 }
 
 .threat-card:hover {
-  border-color: var(--border-2);
+  border-color: var(--accent);
   background: var(--card-2);
   transform: translateY(-3px);
-  box-shadow: 0 10px 32px rgba(77, 217, 255, 0.12);
+  box-shadow: var(--shadow-md);
 }
 
 .threat-card.expanded {
   border-color: var(--accent);
   background: var(--card-2);
-  box-shadow: var(--glow);
+  box-shadow: var(--shadow-lg);
 }
 
 .threat-icon {
@@ -338,15 +340,15 @@ nav {
 }
 
 .danger-high {
-  background: rgba(255, 94, 135, 0.12);
+  background: rgba(230, 57, 70, 0.1);
   color: var(--accent-2);
-  border: 1px solid rgba(255, 94, 135, 0.28);
+  border: 1px solid rgba(230, 57, 70, 0.28);
 }
 
 .danger-med {
-  background: rgba(255, 200, 87, 0.12);
+  background: rgba(240, 165, 0, 0.12);
   color: var(--accent-warm);
-  border: 1px solid rgba(255, 200, 87, 0.28);
+  border: 1px solid rgba(240, 165, 0, 0.28);
 }
 
 .threat-title {
@@ -430,7 +432,7 @@ nav {
   height: 4px;
   flex: 1;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--border);
   transition: background 0.38s;
 }
 
@@ -442,7 +444,7 @@ nav {
 
 @keyframes pulseBar {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+  50% { opacity: 0.4; }
 }
 
 .sim-scenario {
@@ -451,11 +453,12 @@ nav {
   border-radius: 13px;
   overflow: hidden;
   margin-bottom: 1.2rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .sim-header {
   padding: 0.75rem 1.3rem;
-  background: rgba(15, 31, 58, 0.85);
+  background: var(--card-2);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -485,7 +488,7 @@ nav {
 }
 
 .sim-message {
-  background: rgba(15, 31, 58, 0.6);
+  background: var(--bg-2);
   border: 1px solid var(--border);
   border-radius: 9px;
   padding: 1rem 1.2rem;
@@ -493,11 +496,12 @@ nav {
   line-height: 1.75;
   white-space: pre-line;
   margin-bottom: 1.2rem;
+  color: var(--text);
 }
 
 .highlight-red {
   color: var(--accent-2);
-  background: rgba(255, 94, 135, 0.1);
+  background: rgba(230, 57, 70, 0.1);
   padding: 1px 4px;
   border-radius: 3px;
   font-weight: 600;
@@ -505,7 +509,7 @@ nav {
 
 .highlight-yellow {
   color: var(--accent-warm);
-  background: rgba(255, 200, 87, 0.1);
+  background: rgba(240, 165, 0, 0.14);
   padding: 1px 4px;
   border-radius: 3px;
 }
@@ -522,6 +526,7 @@ nav {
   font-weight: 600;
   margin-bottom: 0.9rem;
   line-height: 1.5;
+  color: var(--text);
 }
 
 .sim-options {
@@ -531,7 +536,7 @@ nav {
 }
 
 .sim-option {
-  background: var(--card-2);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 9px;
   padding: 0.85rem 1rem;
@@ -547,20 +552,20 @@ nav {
 }
 
 .sim-option:hover:not(:disabled) {
-  border-color: var(--border-2);
-  background: rgba(77, 217, 255, 0.07);
+  border-color: var(--accent);
+  background: rgba(0, 102, 204, 0.04);
   transform: translateX(4px);
 }
 
 .sim-option.correct {
-  border-color: #28c840;
-  background: rgba(40, 200, 64, 0.1);
-  color: #5be077;
+  border-color: var(--accent-green);
+  background: rgba(42, 157, 74, 0.08);
+  color: var(--accent-green);
 }
 
 .sim-option.wrong {
   border-color: var(--accent-2);
-  background: rgba(255, 94, 135, 0.1);
+  background: rgba(230, 57, 70, 0.06);
   color: var(--accent-2);
 }
 
@@ -570,7 +575,8 @@ nav {
   width: 26px;
   height: 26px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -578,6 +584,7 @@ nav {
   font-weight: 700;
   flex-shrink: 0;
   font-family: 'Unbounded', sans-serif;
+  color: var(--text);
 }
 
 .sim-feedback {
@@ -592,7 +599,7 @@ nav {
 }
 
 .sim-feedback.visible { display: block; }
-.sim-feedback.correct-fb { border-color: #28c840; }
+.sim-feedback.correct-fb { border-color: var(--accent-green); }
 .sim-feedback.wrong-fb { border-color: var(--accent-2); }
 
 .sim-feedback-title {
@@ -619,9 +626,10 @@ nav {
   padding: 1.6rem;
   margin-bottom: 0.9rem;
   transition: border-color 0.28s;
+  box-shadow: var(--shadow-sm);
 }
 
-.quiz-card.qa { border-color: rgba(77, 217, 255, 0.3); }
+.quiz-card.qa { border-color: var(--accent); }
 
 .quiz-num {
   font-family: 'Unbounded', sans-serif;
@@ -637,6 +645,7 @@ nav {
   font-weight: 600;
   line-height: 1.5;
   margin-bottom: 1.1rem;
+  color: var(--text);
 }
 
 .quiz-opts {
@@ -646,7 +655,7 @@ nav {
 }
 
 .quiz-opt {
-  background: var(--card-2);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.78rem 0.95rem;
@@ -662,24 +671,24 @@ nav {
 }
 
 .quiz-opt:hover:not(:disabled) {
-  border-color: rgba(155, 133, 255, 0.45);
-  background: rgba(155, 133, 255, 0.08);
+  border-color: var(--accent-3);
+  background: rgba(108, 71, 214, 0.05);
 }
 
 .quiz-opt.selected {
   border-color: var(--accent-3);
-  background: rgba(155, 133, 255, 0.12);
+  background: rgba(108, 71, 214, 0.08);
 }
 
 .quiz-opt.correct-q {
-  border-color: #28c840;
-  background: rgba(40, 200, 64, 0.1);
-  color: #5be077;
+  border-color: var(--accent-green);
+  background: rgba(42, 157, 74, 0.08);
+  color: var(--accent-green);
 }
 
 .quiz-opt.wrong-q {
   border-color: var(--accent-2);
-  background: rgba(255, 94, 135, 0.1);
+  background: rgba(230, 57, 70, 0.06);
   color: var(--accent-2);
 }
 
@@ -707,6 +716,7 @@ nav {
   justify-content: center;
   margin: 0 auto 1.7rem;
   position: relative;
+  background: var(--card);
 }
 
 .results-score::before {
@@ -714,7 +724,7 @@ nav {
   position: absolute;
   inset: -7px;
   border-radius: 50%;
-  border: 1px solid rgba(77, 217, 255, 0.1);
+  border: 1px solid rgba(0, 102, 204, 0.15);
 }
 
 .score-num {
@@ -735,6 +745,7 @@ nav {
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 0.6rem;
+  color: var(--text);
 }
 
 .results-desc {
@@ -751,6 +762,7 @@ nav {
   padding: 1.3rem;
   text-align: left;
   margin-bottom: 1.7rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .results-tips h4 {
@@ -797,7 +809,7 @@ nav {
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-2); }
-::-webkit-scrollbar-thumb { background: var(--card-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
