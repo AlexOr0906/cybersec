@@ -1,0 +1,803 @@
+/* ============================================================
+   КиберЩит — стили сайта
+   Палитра: глубокий тёплый синий с градиентом
+   Навигация: крупный шрифт (1.05rem), увеличенная высота
+   ============================================================ */
+
+:root {
+  /* Базовая палитра — более позитивная, тёмно-синяя с тёплыми акцентами */
+  --bg-1: #1a2d52;        /* основной фон сверху */
+  --bg-2: #0f1f3a;        /* фон по центру (чуть темнее) */
+  --bg-3: #1a2d52;        /* основной фон снизу */
+  --card: #1e3258;        /* карточки */
+  --card-2: #284070;      /* карточки активные/наведённые */
+  --accent: #4dd9ff;      /* основной голубой */
+  --accent-2: #ff5e87;    /* розово-красный */
+  --accent-3: #9b85ff;    /* фиолетовый */
+  --accent-warm: #ffc857; /* тёплый жёлтый (для бейджей) */
+  --text: #f0f3ff;
+  --text-dim: #a0b3d4;
+  --border: rgba(77, 217, 255, 0.22);
+  --border-2: rgba(77, 217, 255, 0.4);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --glow: 0 0 28px rgba(77, 217, 255, 0.22);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: 'Golos Text', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Лёгкая сетка поверх фона — даёт «технологичный» характер, но не мрачный */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(77, 217, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(77, 217, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   НАВИГАЦИЯ — крупный шрифт по требованию учителя
+   ============================================================ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 31, 58, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+
+.nav-logo {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 0 18px rgba(77, 217, 255, 0.35);
+}
+
+.nav-logo::before {
+  content: '⬡';
+  font-size: 1.5rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.nav-links button {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: 'Golos Text', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.6rem 1.3rem;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.22s;
+}
+
+.nav-links button:hover,
+.nav-links button.active {
+  color: var(--accent);
+  background: rgba(77, 217, 255, 0.12);
+}
+
+/* ============================================================
+   СЕКЦИИ
+   ============================================================ */
+.section {
+  display: none;
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 76px);
+  padding: 3rem 2rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section.active { display: block; }
+
+.section-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-sub {
+  color: var(--text-dim);
+  margin-bottom: 2.2rem;
+  font-size: 0.98rem;
+}
+
+/* ============================================================
+   ГЛАВНАЯ
+   ============================================================ */
+.hero {
+  text-align: center;
+  padding: 4.5rem 1rem 3rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(77, 217, 255, 0.1);
+  border: 1px solid rgba(77, 217, 255, 0.28);
+  border-radius: 100px;
+  padding: 0.4rem 1.1rem;
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.08;
+  margin-bottom: 1.3rem;
+  background: linear-gradient(130deg, #fff 0%, var(--accent) 50%, var(--accent-3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  max-width: 520px;
+  margin: 0 auto 2.6rem;
+  line-height: 1.75;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.6rem;
+  gap: 0;
+}
+
+.stat {
+  padding: 1.4rem 2.2rem;
+  position: relative;
+}
+
+.stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 22%;
+  height: 56%;
+  width: 1px;
+  background: var(--border);
+}
+
+.stat-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 900;
+  display: block;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.stat:nth-child(2) .stat-num { color: var(--accent-warm); }
+.stat:nth-child(3) .stat-num { color: var(--accent-2); }
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.4rem;
+  display: block;
+}
+
+/* ============================================================
+   КНОПКИ
+   ============================================================ */
+.btn-primary, .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.95rem 1.8rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #0f1f3a;
+}
+
+.btn-primary:hover {
+  background: #6de4ff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(77, 217, 255, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--border-2);
+}
+
+.btn-secondary:hover {
+  background: rgba(77, 217, 255, 0.08);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   КАРТОЧКИ УГРОЗ
+   ============================================================ */
+.threats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.threat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.6rem;
+  cursor: pointer;
+  transition: all 0.28s;
+  position: relative;
+}
+
+.threat-card:hover {
+  border-color: var(--border-2);
+  background: var(--card-2);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(77, 217, 255, 0.12);
+}
+
+.threat-card.expanded {
+  border-color: var(--accent);
+  background: var(--card-2);
+  box-shadow: var(--glow);
+}
+
+.threat-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  display: inline-block;
+  transition: transform 0.28s;
+  transform-origin: center;
+}
+
+.threat-card:hover .threat-icon {
+  transform: scale(1.12) rotate(-6deg);
+}
+
+.danger-tag {
+  display: inline-block;
+  padding: 0.18rem 0.6rem;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 0.7rem;
+  margin-left: 0.6rem;
+}
+
+.danger-high {
+  background: rgba(255, 94, 135, 0.12);
+  color: var(--accent-2);
+  border: 1px solid rgba(255, 94, 135, 0.28);
+}
+
+.danger-med {
+  background: rgba(255, 200, 87, 0.12);
+  color: var(--accent-warm);
+  border: 1px solid rgba(255, 200, 87, 0.28);
+}
+
+.threat-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+
+.threat-short {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 0.7rem;
+}
+
+.threat-expand {
+  font-size: 0.74rem;
+  color: var(--accent);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.threat-details {
+  display: none;
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+.threat-card.expanded .threat-details { display: block; }
+
+.threat-details h4 {
+  font-size: 0.74rem;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  margin-top: 0.8rem;
+  font-weight: 600;
+}
+
+.threat-details h4:first-child { margin-top: 0; }
+
+.threat-details ul { list-style: none; }
+
+.threat-details li {
+  font-size: 0.86rem;
+  color: var(--text-dim);
+  padding: 0.28rem 0 0.28rem 1.1rem;
+  position: relative;
+  line-height: 1.55;
+}
+
+.threat-details li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.78rem;
+  top: 0.36rem;
+}
+
+/* ============================================================
+   СИМУЛЯТОР
+   ============================================================ */
+.sim-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.sim-progress {
+  display: flex;
+  gap: 0.32rem;
+  margin-bottom: 1.6rem;
+}
+
+.sim-dot {
+  height: 4px;
+  flex: 1;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.38s;
+}
+
+.sim-dot.done { background: var(--accent); }
+.sim-dot.current {
+  background: var(--accent-3);
+  animation: pulseBar 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseBar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.sim-scenario {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+}
+
+.sim-header {
+  padding: 0.75rem 1.3rem;
+  background: rgba(15, 31, 58, 0.85);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.84rem;
+  color: var(--text-dim);
+}
+
+.sim-header-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+
+.sim-body { padding: 1.3rem; }
+
+.sim-label {
+  color: var(--text-dim);
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  margin-bottom: 0.32rem;
+}
+
+.sim-message {
+  background: rgba(15, 31, 58, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 1rem 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  white-space: pre-line;
+  margin-bottom: 1.2rem;
+}
+
+.highlight-red {
+  color: var(--accent-2);
+  background: rgba(255, 94, 135, 0.1);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.highlight-yellow {
+  color: var(--accent-warm);
+  background: rgba(255, 200, 87, 0.1);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.sim-counter {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.78rem;
+  color: var(--accent-3);
+  margin-bottom: 0.85rem;
+}
+
+.sim-question {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+  line-height: 1.5;
+}
+
+.sim-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sim-option {
+  background: var(--card-2);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  font-family: 'Golos Text', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.sim-option:hover:not(:disabled) {
+  border-color: var(--border-2);
+  background: rgba(77, 217, 255, 0.07);
+  transform: translateX(4px);
+}
+
+.sim-option.correct {
+  border-color: #28c840;
+  background: rgba(40, 200, 64, 0.1);
+  color: #5be077;
+}
+
+.sim-option.wrong {
+  border-color: var(--accent-2);
+  background: rgba(255, 94, 135, 0.1);
+  color: var(--accent-2);
+}
+
+.sim-option:disabled { cursor: default; transform: none !important; }
+
+.option-letter {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: 'Unbounded', sans-serif;
+}
+
+.sim-feedback {
+  display: none;
+  background: var(--card-2);
+  border-radius: 9px;
+  padding: 1rem 1.2rem;
+  margin-top: 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  border-left: 3px solid var(--accent);
+}
+
+.sim-feedback.visible { display: block; }
+.sim-feedback.correct-fb { border-color: #28c840; }
+.sim-feedback.wrong-fb { border-color: var(--accent-2); }
+
+.sim-feedback-title {
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  font-size: 0.92rem;
+}
+
+.sim-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+/* ============================================================
+   ТЕСТ
+   ============================================================ */
+.quiz-container { max-width: 660px; margin: 0 auto; }
+
+.quiz-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 1.6rem;
+  margin-bottom: 0.9rem;
+  transition: border-color 0.28s;
+}
+
+.quiz-card.qa { border-color: rgba(77, 217, 255, 0.3); }
+
+.quiz-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.72rem;
+  color: var(--accent-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+}
+
+.quiz-q {
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 1.1rem;
+}
+
+.quiz-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.52rem;
+}
+
+.quiz-opt {
+  background: var(--card-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.78rem 0.95rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  font-family: 'Golos Text', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.quiz-opt:hover:not(:disabled) {
+  border-color: rgba(155, 133, 255, 0.45);
+  background: rgba(155, 133, 255, 0.08);
+}
+
+.quiz-opt.selected {
+  border-color: var(--accent-3);
+  background: rgba(155, 133, 255, 0.12);
+}
+
+.quiz-opt.correct-q {
+  border-color: #28c840;
+  background: rgba(40, 200, 64, 0.1);
+  color: #5be077;
+}
+
+.quiz-opt.wrong-q {
+  border-color: var(--accent-2);
+  background: rgba(255, 94, 135, 0.1);
+  color: var(--accent-2);
+}
+
+.quiz-opt:disabled { cursor: default; transform: none !important; }
+
+.quiz-submit { text-align: center; margin-top: 1.8rem; }
+
+/* ============================================================
+   РЕЗУЛЬТАТЫ ТЕСТА
+   ============================================================ */
+.results-box {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.results-score {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.7rem;
+  position: relative;
+}
+
+.results-score::before {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px solid rgba(77, 217, 255, 0.1);
+}
+
+.score-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.score-total {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+.results-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.results-desc {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin-bottom: 1.6rem;
+}
+
+.results-tips {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 1.3rem;
+  text-align: left;
+  margin-bottom: 1.7rem;
+}
+
+.results-tips h4 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.76rem;
+  color: var(--accent);
+  margin-bottom: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.tip-item {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  padding: 0.38rem 0;
+  font-size: 0.86rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+.tip-icon {
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+@media (max-width: 768px) {
+  nav { padding: 0 1.1rem; height: 64px; }
+  .nav-logo { font-size: 1rem; }
+  .nav-links { gap: 0.2rem; }
+  .nav-links button {
+    font-size: 0.92rem;
+    padding: 0.5rem 0.85rem;
+  }
+  .section { padding: 2rem 1rem 3rem; }
+  .hero { padding: 2.5rem 0.5rem 2rem; }
+  .stat { padding: 1rem 1.3rem; }
+  .stat-num { font-size: 1.7rem; }
+  .threats-grid { grid-template-columns: 1fr; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-2); }
+::-webkit-scrollbar-thumb { background: var(--card-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }

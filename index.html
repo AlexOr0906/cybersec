@@ -1,554 +1,158 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>КиберЩит — Знай угрозу, защити себя</title>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<style>
-:root{
-  --bg:#050911;--card:#0d1825;--card2:#13243a;
-  --ac:#00e5ff;--r:#ff3b6b;--p:#7b61ff;--g:#00ff9d;--y:#ffb300;
-  --tx:#e8eaf6;--dim:#5c6f94;--br:rgba(0,229,255,0.1);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font-family:'Golos Text',sans-serif;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(0,229,255,.016) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(0,229,255,.016) 1px,transparent 1px);
-  background-size:70px 70px}
-#cv{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.45}
-
-/* NAV */
-nav{position:sticky;top:0;z-index:100;height:58px;
-  background:rgba(5,9,17,.88);backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--br);padding:0 2rem;
-  display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:'Unbounded',sans-serif;font-weight:900;font-size:.86rem;
-  color:var(--ac);display:flex;align-items:center;gap:.4rem;
-  letter-spacing:.06em;text-shadow:0 0 16px rgba(0,229,255,.3)}
-.logo svg{width:19px;height:19px}
-.nb{display:flex;gap:.1rem}
-.nb button{background:none;border:none;color:var(--dim);
-  font-family:'Golos Text',sans-serif;font-size:.82rem;
-  padding:.36rem .82rem;border-radius:6px;cursor:pointer;transition:all .18s;position:relative}
-.nb button::after{content:'';position:absolute;bottom:2px;left:50%;
-  transform:translateX(-50%) scaleX(0);width:12px;height:2px;
-  background:var(--ac);border-radius:2px;transition:transform .28s}
-.nb button:hover,.nb button.on{color:var(--ac)}
-.nb button.on::after{transform:translateX(-50%) scaleX(1)}
-
-/* SECTION */
-.sec{display:none;position:relative;z-index:1;
-  min-height:calc(100vh - 58px);padding:3rem 2rem;
-  max-width:1080px;margin:0 auto}
-.sec.on{display:block}
-
-/* ── HERO ── */
-.hero{text-align:center;padding:4.5rem 1rem 3rem}
-.badge{display:inline-flex;align-items:center;gap:.45rem;
-  background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.18);
-  border-radius:100px;padding:.35rem .95rem;font-size:.7rem;color:var(--ac);
-  letter-spacing:.1em;text-transform:uppercase;margin-bottom:2.2rem;font-weight:600;
-  opacity:0;transform:translateY(18px)}
-.bdot{width:5px;height:5px;border-radius:50%;background:var(--ac);animation:bd 2s infinite}
-@keyframes bd{0%,100%{opacity:1}50%{opacity:.15}}
-h1{font-family:'Unbounded',sans-serif;font-size:clamp(1.85rem,5vw,3.7rem);
-  font-weight:900;line-height:1.06;margin-bottom:1.3rem;
-  background:linear-gradient(130deg,#fff 0%,var(--ac) 52%,var(--p) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  opacity:0;transform:translateY(26px)}
-.hp{font-size:.97rem;color:var(--dim);max-width:490px;margin:0 auto 2.8rem;
-  line-height:1.78;opacity:0;transform:translateY(16px)}
-
-/* STATS ROW — static, no counting animation */
-.srow{display:flex;justify-content:center;flex-wrap:wrap;margin-bottom:2.8rem;gap:0}
-.st{padding:1.3rem 2rem;position:relative;opacity:0;transform:translateY(12px)}
-.st:not(:last-child)::after{content:'';position:absolute;right:0;top:20%;
-  height:60%;width:1px;background:var(--br)}
-.stn{font-family:'Unbounded',sans-serif;font-size:2rem;font-weight:900;
-  display:block;line-height:1}
-.stl{font-size:.68rem;color:var(--dim);text-transform:uppercase;
-  letter-spacing:.07em;margin-top:.32rem;display:block}
-.cr{color:var(--r)}.ca{color:var(--ac)}.cp{color:var(--p)}.cg{color:var(--g)}.cy{color:var(--y)}
-
-.hb{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;
-  opacity:0;transform:translateY(12px)}
-.btnp{display:inline-flex;align-items:center;gap:.5rem;
-  background:var(--ac);color:#050911;font-family:'Unbounded',sans-serif;
-  font-size:.77rem;font-weight:700;padding:.82rem 1.65rem;border-radius:8px;
-  border:none;cursor:pointer;transition:all .22s;letter-spacing:.04em;
-  text-transform:uppercase;position:relative;overflow:hidden}
-.btnp::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
-  transform:translateX(-100%);transition:transform .5s}
-.btnp:hover::after{transform:translateX(100%)}
-.btnp:hover{background:#26edff;transform:translateY(-2px);
-  box-shadow:0 7px 26px rgba(0,229,255,.35)}
-.btns{display:inline-flex;align-items:center;gap:.5rem;
-  background:transparent;color:var(--ac);font-family:'Unbounded',sans-serif;
-  font-size:.77rem;font-weight:700;padding:.82rem 1.65rem;border-radius:8px;
-  border:1px solid rgba(0,229,255,.26);cursor:pointer;transition:all .22s;
-  letter-spacing:.04em;text-transform:uppercase}
-.btns:hover{background:rgba(0,229,255,.07);border-color:var(--ac);transform:translateY(-2px)}
-
-/* VISUAL ICON STRIP */
-.vstrip{display:flex;justify-content:center;gap:.9rem;flex-wrap:wrap;
-  padding:0 0 2.5rem;position:relative;z-index:1}
-.vc{background:var(--card);border:1px solid var(--br);border-radius:14px;
-  padding:1.3rem 1rem;text-align:center;cursor:pointer;transition:all .28s;
-  flex:1;min-width:120px;max-width:170px}
-.vc:hover{border-color:rgba(0,229,255,.28);background:var(--card2);
-  transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,229,255,.09)}
-.vc svg{width:60px;height:60px;margin-bottom:.7rem}
-.vcl{font-size:.76rem;font-weight:600;color:var(--tx);line-height:1.4;margin-bottom:.35rem}
-.vcv{font-family:'Unbounded',sans-serif;font-size:.64rem;font-weight:700;letter-spacing:.04em}
-
-/* SECTION LABELS */
-.stitle{font-family:'Unbounded',sans-serif;font-size:1.45rem;font-weight:700;margin-bottom:.32rem}
-.ssub{color:var(--dim);margin-bottom:2rem;font-size:.88rem}
-
-/* THREAT GRID */
-.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
-  gap:1.1rem;margin-bottom:2.5rem}
-/* KEY FIX: no overflow:hidden, icon in its own block-level container */
-.tcard{background:var(--card);border:1px solid var(--br);border-radius:14px;
-  padding:1.4rem;cursor:pointer;transition:border-color .28s,background .28s,
-  transform .28s,box-shadow .28s;position:relative}
-.tcard:hover{border-color:rgba(0,229,255,.28);background:var(--card2);
-  transform:translateY(-3px);box-shadow:0 9px 32px rgba(0,229,255,.09)}
-.tcard.exp{border-color:var(--ac);background:var(--card2);
-  box-shadow:0 0 26px rgba(0,229,255,.13)}
-/* Illustration inside card */
-.tsvg{display:block;width:80px;height:80px;margin:0 0 .75rem}
-.dtag{display:inline-block;padding:.16rem .52rem;border-radius:4px;
-  font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;
-  margin-bottom:.6rem}
-.dh{background:rgba(255,59,107,.1);color:var(--r);border:1px solid rgba(255,59,107,.2)}
-.dm{background:rgba(255,179,0,.08);color:var(--y);border:1px solid rgba(255,179,0,.18)}
-.dn{background:rgba(123,97,255,.1);color:var(--p);border:1px solid rgba(123,97,255,.2)}
-.ttitle{font-family:'Unbounded',sans-serif;font-size:.91rem;font-weight:700;margin-bottom:.36rem}
-.tshort{font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:.6rem}
-.texp{font-size:.71rem;color:var(--ac);letter-spacing:.07em;text-transform:uppercase;
-  font-weight:600;display:flex;align-items:center;gap:.28rem}
-.tarr{display:inline-block;transition:transform .28s}
-.tcard.exp .tarr{transform:rotate(180deg)}
-.td{display:none;margin-top:.85rem;padding-top:.85rem;border-top:1px solid var(--br)}
-.tcard.exp .td{display:block}
-.td h4{font-size:.7rem;color:var(--r);text-transform:uppercase;
-  letter-spacing:.08em;margin-bottom:.42rem;margin-top:.7rem;font-weight:600}
-.td h4:first-child{margin-top:0}
-.td ul{list-style:none}
-.td li{font-size:.8rem;color:var(--dim);padding:.25rem 0 .25rem 1rem;
-  position:relative;line-height:1.5}
-.td li::before{content:'→';position:absolute;left:0;color:var(--ac);font-size:.68rem}
-
-/* SIMULATOR */
-.spb{display:flex;gap:.3rem;margin-bottom:1.6rem}
-.spbs{height:3px;flex:1;border-radius:2px;background:rgba(255,255,255,.06);transition:background .38s}
-.spbs.done{background:var(--ac)}.spbs.curr{background:var(--p);animation:pba 1.5s ease-in-out infinite}
-@keyframes pba{0%,100%{opacity:1}50%{opacity:.3}}
-.scard{background:var(--card);border:1px solid var(--br);border-radius:13px;
-  overflow:hidden;margin-bottom:1.2rem;animation:sIn .3s ease}
-@keyframes sIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.stbar{padding:.7rem 1.2rem;background:var(--card2);border-bottom:1px solid var(--br);
-  display:flex;align-items:center;gap:.45rem}
-.wd{width:8px;height:8px;border-radius:50%}
-.wr2{background:#ff5f57}.wy2{background:#febc2e}.wg2{background:#28c840}
-.sttl{margin-left:.35rem;font-size:.77rem;color:var(--dim)}
-.sfr{margin-left:auto;font-size:.72rem;color:var(--p)}
-.sbdy{padding:1.2rem}
-.ssub2{font-weight:600;font-size:.91rem;margin-bottom:.85rem}
-.smsg{background:var(--bg);border:1px solid var(--br);border-radius:8px;
-  padding:.95rem 1.1rem;font-size:.85rem;line-height:1.75;white-space:pre-line;margin-bottom:1.1rem}
-.hr{color:var(--r);background:rgba(255,59,107,.1);padding:1px 3px;border-radius:3px;font-weight:600}
-.hy{color:var(--y);background:rgba(255,179,0,.09);padding:1px 3px;border-radius:3px}
-.hg{color:var(--g);background:rgba(0,255,157,.07);padding:1px 3px;border-radius:3px}
-.sctr{font-family:'Unbounded',sans-serif;font-size:.75rem;color:var(--p);margin-bottom:.85rem}
-.sq{font-size:.93rem;font-weight:600;margin-bottom:.8rem;line-height:1.5}
-.sopts{display:flex;flex-direction:column;gap:.55rem}
-.sopt{background:var(--card2);border:1px solid var(--br);border-radius:8px;
-  padding:.82rem .95rem;font-size:.84rem;color:var(--tx);cursor:pointer;
-  transition:all .18s;text-align:left;font-family:'Golos Text',sans-serif;
-  display:flex;align-items:center;gap:.62rem}
-.sopt:hover:not(:disabled){border-color:rgba(0,229,255,.3);background:rgba(0,229,255,.05);
-  transform:translateX(4px)}
-.sopt.oka{border-color:#28c840;background:rgba(40,200,64,.08);color:#2dcc44}
-.sopt.erra{border-color:var(--r);background:rgba(255,59,107,.08);color:var(--r)}
-.sopt:disabled{cursor:default;transform:none!important}
-.olbl{width:24px;height:24px;border-radius:5px;background:rgba(255,255,255,.04);
-  display:flex;align-items:center;justify-content:center;font-size:.7rem;
-  font-weight:700;flex-shrink:0;font-family:'Unbounded',sans-serif}
-/* KEY FIX: no CSS animation on .sfb — use only GSAP so it stays visible */
-.sfb{display:none;background:var(--card2);border-radius:8px;
-  padding:.95rem 1.1rem;margin-top:.8rem;font-size:.82rem;line-height:1.65;
-  border-left:3px solid var(--ac)}
-.sfb.vis{display:block}
-.sfb.fok{border-color:#28c840}.sfb.ferr{border-color:var(--r)}
-.fbt{font-weight:700;margin-bottom:.28rem;font-size:.85rem}
-.snav{display:flex;justify-content:flex-end;margin-top:1rem}
-
-/* QUIZ */
-.qcard{background:var(--card);border:1px solid var(--br);border-radius:13px;
-  padding:1.5rem;margin-bottom:.8rem;transition:border-color .28s}
-.qcard.qa{border-color:rgba(0,229,255,.17)}
-.qnum{font-family:'Unbounded',sans-serif;font-size:.68rem;color:var(--p);
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
-.qq{font-size:.93rem;font-weight:600;line-height:1.5;margin-bottom:1.05rem}
-.qopts{display:flex;flex-direction:column;gap:.48rem}
-.qopt{background:var(--card2);border:1px solid var(--br);border-radius:7px;
-  padding:.72rem .9rem;font-size:.84rem;color:var(--tx);cursor:pointer;
-  transition:all .18s;text-align:left;font-family:'Golos Text',sans-serif;
-  display:flex;align-items:center;gap:.58rem}
-.qopt:hover:not(:disabled){border-color:rgba(123,97,255,.38);background:rgba(123,97,255,.07)}
-.qopt.sel{border-color:var(--p);background:rgba(123,97,255,.1)}
-.qopt.qok{border-color:#28c840;background:rgba(40,200,64,.08);color:#2dcc44}
-.qopt.qerr{border-color:var(--r);background:rgba(255,59,107,.08);color:var(--r)}
-.qopt:disabled{cursor:default;transform:none!important}
-.qsub{text-align:center;margin-top:1.7rem}
-
-/* RESULTS */
-.rbox{max-width:540px;margin:0 auto;text-align:center}
-.rring{width:155px;height:155px;border-radius:50%;border:2px solid var(--ac);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  margin:0 auto 1.6rem;position:relative}
-.rring::before{content:'';position:absolute;inset:-7px;border-radius:50%;
-  border:1px solid rgba(0,229,255,.07)}
-.rnum{font-family:'Unbounded',sans-serif;font-size:2.9rem;font-weight:900;
-  color:var(--ac);line-height:1}
-.rof{font-size:.78rem;color:var(--dim)}
-.rtitle{font-family:'Unbounded',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:.55rem}
-.rdesc{color:var(--dim);font-size:.88rem;line-height:1.72;margin-bottom:1.5rem}
-.tbox{background:var(--card);border:1px solid var(--br);border-radius:11px;
-  padding:1.2rem;text-align:left;margin-bottom:1.7rem}
-.tbox h4{font-family:'Unbounded',sans-serif;font-size:.73rem;color:var(--ac);
-  margin-bottom:.82rem;text-transform:uppercase;letter-spacing:.06em}
-.trow{display:flex;gap:.6rem;align-items:flex-start;padding:.36rem 0;
-  font-size:.82rem;color:var(--dim);line-height:1.5}
-.tico2{font-size:.9rem;flex-shrink:0;margin-top:2px}
-.bgrp{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
-
-@media(max-width:580px){
-  nav{padding:0 1rem}
-  .nb button{padding:.32rem .45rem;font-size:.74rem}
-  .sec{padding:1.8rem .9rem}
-  .st{padding:1rem 1.3rem}
-  .stn{font-size:1.6rem}
-  .vc{min-width:100px;padding:1rem .7rem}
-}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--card2);border-radius:2px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кибербезопасность: знай и защищайся</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<canvas id="cv"></canvas>
 
 <nav>
-  <div class="logo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/>
-    </svg>
-    КиберЩит
-  </div>
-  <div class="nb">
-    <button class="on" onclick="go('home')">Главная</button>
-    <button onclick="go('threats')">Угрозы</button>
-    <button onclick="go('sim')">Симулятор</button>
-    <button onclick="go('quiz')">Тест</button>
+  <div class="nav-logo">КиберЩит</div>
+  <div class="nav-links">
+    <button class="active" onclick="showSection('home')">Главная</button>
+    <button onclick="showSection('threats')">Угрозы</button>
+    <button onclick="showSection('simulator')">Симулятор</button>
+    <button onclick="showSection('quiz')">Тест</button>
   </div>
 </nav>
 
-<!-- ══════════ HOME ══════════ -->
-<div id="home" class="sec on">
+<!-- HOME -->
+<div id="home" class="section active">
   <div class="hero">
-    <div class="badge"><span class="bdot"></span>Проект · Гимназия №26 · Челябинск · 2025</div>
-    <h1>Знай угрозу —<br>защити себя</h1>
-    <p class="hp">Каждый день тысячи людей теряют деньги и данные из-за кибермошенников. Узнай как они работают — и не попадись.</p>
-
-    <!-- STATIC stats — no counting animation -->
-    <div class="srow">
-      <div class="st">
-        <span class="stn cr">675 000</span>
-        <span class="stl">Киберпреступлений в 2025 г.</span>
+    <div class="hero-badge">Проект по кибербезопасности · Гимназия №26</div>
+    <h1>Знай угрозу — защити себя</h1>
+    <p>Каждый день тысячи школьников становятся жертвами киберпреступников. Узнай как они действуют — и не попадись.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">675K</span>
+        <span class="stat-label">Киберпреступлений в 2025</span>
       </div>
-      <div class="st">
-        <span class="stn ca">38%</span>
-        <span class="stl">Всех преступлений в РФ</span>
+      <div class="stat">
+        <span class="stat-num">38%</span>
+        <span class="stat-label">Всех преступлений в стране</span>
       </div>
-      <div class="st">
-        <span class="stn cp">170 млрд ₽</span>
-        <span class="stl">Ущерб за 2025 год</span>
-      </div>
-      <div class="st">
-        <span class="stn cg">27 млн</span>
-        <span class="stl">Мошенничеств предотвращено</span>
+      <div class="stat">
+        <span class="stat-num">170₽</span>
+        <span class="stat-label">Млрд ущерба за 2025</span>
       </div>
     </div>
-
-    <div class="hb">
-      <button class="btnp" onclick="go('threats')">▶ Изучить угрозы</button>
-      <button class="btns" onclick="go('sim')">Попробовать симулятор</button>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="showSection('threats')">▶ Изучить угрозы</button>
+      <button class="btn-secondary" onclick="showSection('simulator')">Попробовать симулятор</button>
     </div>
-  </div>
-
-  <!-- Visual strip with inline SVG illustrations -->
-  <div class="vstrip">
-
-    <div class="vc" onclick="go('threats')">
-      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Fishing hook phishing illustration -->
-        <circle cx="30" cy="30" r="26" stroke="#ff3b6b" stroke-width="1" stroke-dasharray="4 3" opacity=".25"/>
-        <path d="M20 26C20 18 25 13 30 13C35 13 40 18 40 26C40 36 30 44 30 44C30 44 20 36 20 26Z" fill="rgba(255,59,107,0.12)" stroke="#ff3b6b" stroke-width="1.4"/>
-        <circle cx="30" cy="25" r="5" fill="rgba(255,59,107,0.2)" stroke="#ff3b6b" stroke-width="1.4"/>
-        <circle cx="30" cy="25" r="2" fill="#ff3b6b"/>
-        <line x1="30" y1="44" x2="30" y2="52" stroke="#ff3b6b" stroke-width="1.8" stroke-linecap="round" opacity=".4"/>
-        <circle cx="30" cy="55" r="2" fill="#ff3b6b" opacity=".4"/>
-        <!-- hook -->
-        <path d="M44 8 L44 20 C44 20 50 20 50 28 C50 36 44 36 44 36" stroke="#ff3b6b" stroke-width="1.8" stroke-linecap="round" fill="none" opacity=".7"/>
-        <circle cx="50" cy="36" r="2.5" fill="#ff3b6b" opacity=".7"/>
-      </svg>
-      <div class="vcl">Фишинг</div>
-      <div class="vcv cr">Угроза №1</div>
-    </div>
-
-    <div class="vc" onclick="go('threats')">
-      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Virus / malware bug -->
-        <circle cx="30" cy="30" r="14" fill="rgba(123,97,255,0.12)" stroke="#7b61ff" stroke-width="1.4"/>
-        <circle cx="30" cy="30" r="7" fill="rgba(123,97,255,0.18)" stroke="#7b61ff" stroke-width="1"/>
-        <!-- legs -->
-        <line x1="16" y1="24" x2="10" y2="18" stroke="#7b61ff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
-        <line x1="16" y1="30" x2="8" y2="30" stroke="#7b61ff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
-        <line x1="16" y1="36" x2="10" y2="42" stroke="#7b61ff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
-        <line x1="44" y1="24" x2="50" y2="18" stroke="#7b61ff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
-        <line x1="44" y1="30" x2="52" y2="30" stroke="#7b61ff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
-        <line x1="44" y1="36" x2="50" y2="42" stroke="#7b61ff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
-        <!-- eyes -->
-        <circle cx="26" cy="28" r="2" fill="#7b61ff"/>
-        <circle cx="34" cy="28" r="2" fill="#7b61ff"/>
-        <path d="M25 34 Q30 37 35 34" stroke="#7b61ff" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-      </svg>
-      <div class="vcl">Вредоносное ПО</div>
-      <div class="vcv cp">Трояны и стилеры</div>
-    </div>
-
-    <div class="vc" onclick="go('threats')">
-      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Lock / data theft -->
-        <rect x="14" y="26" width="32" height="24" rx="4" fill="rgba(0,229,255,0.07)" stroke="#00e5ff" stroke-width="1.4"/>
-        <path d="M20 26 L20 20 C20 14 40 14 40 20 L40 26" stroke="#00e5ff" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-        <circle cx="30" cy="38" r="5" fill="rgba(0,229,255,0.15)" stroke="#00e5ff" stroke-width="1.2"/>
-        <line x1="30" y1="38" x2="30" y2="43" stroke="#00e5ff" stroke-width="1.8" stroke-linecap="round"/>
-        <!-- crack -->
-        <path d="M30 11 L27 16 L31 18 L28 23" stroke="#ff3b6b" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>
-      </svg>
-      <div class="vcl">Кража данных</div>
-      <div class="vcv ca">710 млн записей</div>
-    </div>
-
-    <div class="vc" onclick="go('threats')">
-      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- AI robot face -->
-        <rect x="13" y="18" width="34" height="26" rx="6" fill="rgba(0,255,157,0.07)" stroke="#00ff9d" stroke-width="1.4"/>
-        <!-- eyes -->
-        <rect x="20" y="26" width="7" height="5" rx="2" fill="rgba(0,255,157,0.2)" stroke="#00ff9d" stroke-width="1"/>
-        <rect x="33" y="26" width="7" height="5" rx="2" fill="rgba(0,255,157,0.2)" stroke="#00ff9d" stroke-width="1"/>
-        <circle cx="23" cy="29" r="1.5" fill="#00ff9d"/>
-        <circle cx="36" cy="29" r="1.5" fill="#00ff9d"/>
-        <!-- mouth -->
-        <path d="M22 37 Q30 41 38 37" stroke="#00ff9d" stroke-width="1.3" stroke-linecap="round" fill="none"/>
-        <!-- antenna -->
-        <line x1="30" y1="12" x2="30" y2="18" stroke="#00ff9d" stroke-width="1.6" stroke-linecap="round"/>
-        <circle cx="30" cy="11" r="2" fill="#00ff9d" opacity=".6"/>
-        <!-- signal waves -->
-        <path d="M5 26 Q9 20 9 30 Q9 36 13 30" stroke="#00ff9d" stroke-width="1" fill="none" opacity=".45"/>
-        <path d="M55 26 Q51 20 51 30 Q51 36 47 30" stroke="#00ff9d" stroke-width="1" fill="none" opacity=".45"/>
-      </svg>
-      <div class="vcl">ИИ-мошенники</div>
-      <div class="vcv cg">Дипфейки</div>
-    </div>
-
-    <div class="vc" onclick="go('sim')">
-      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Shield with checkmark -->
-        <path d="M30 6 L9 18 L9 34 C9 45 18.5 53.5 30 56 C41.5 53.5 51 45 51 34 L51 18 Z" fill="rgba(255,179,0,0.08)" stroke="#ffb300" stroke-width="1.5"/>
-        <path d="M30 14 L16 22 L16 34 C16 41 22 47 30 49 C38 47 44 41 44 34 L44 22 Z" fill="rgba(255,179,0,0.05)" stroke="#ffb300" stroke-width="1" opacity=".55"/>
-        <path d="M23 32 L28 37 L37 26" stroke="#28c840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <div class="vcl">Симулятор угроз</div>
-      <div class="vcv cy">15 сценариев</div>
-    </div>
-
   </div>
 </div>
 
-<!-- ══════════ THREATS ══════════ -->
-<div id="threats" class="sec">
-  <div class="stitle">Виды киберугроз</div>
-  <div class="ssub">Нажми на карточку — узнай как распознать угрозу и защититься</div>
-  <div class="tgrid">
+<!-- THREATS -->
+<div id="threats" class="section">
+  <div class="section-title">Виды киберугроз</div>
+  <div class="section-sub">Нажми на карточку, чтобы узнать больше и как защититься</div>
+  <div class="threats-grid">
 
-    <div class="tcard" onclick="togT(this)">
-      <svg class="tsvg" viewBox="0 0 80 80" fill="none">
-        <circle cx="40" cy="40" r="34" stroke="#ff3b6b" stroke-width="1" stroke-dasharray="5 4" opacity=".2"/>
-        <path d="M26 34C26 24 32 18 40 18C48 18 54 24 54 34C54 46 40 57 40 57C40 57 26 46 26 34Z" fill="rgba(255,59,107,0.1)" stroke="#ff3b6b" stroke-width="1.5"/>
-        <circle cx="40" cy="32" r="7" fill="rgba(255,59,107,0.18)" stroke="#ff3b6b" stroke-width="1.4"/>
-        <circle cx="40" cy="32" r="3" fill="#ff3b6b"/>
-        <!-- hook line -->
-        <path d="M58 10 L58 26 C58 26 66 26 66 36 C66 46 58 46 58 46" stroke="#ff3b6b" stroke-width="2" stroke-linecap="round" fill="none" opacity=".6"/>
-        <circle cx="66" cy="46" r="3" fill="#ff3b6b" opacity=".6"/>
-        <text x="8" y="16" font-size="8" fill="#ff3b6b" opacity=".5" font-family="monospace">@fake.ru</text>
-      </svg>
-      <span class="dtag dh">Высокий риск</span>
-      <div class="ttitle">Фишинг</div>
-      <div class="tshort">Поддельные письма и сайты, маскирующиеся под банки и сервисы, чтобы украсть данные.</div>
-      <div class="texp">Подробнее <span class="tarr">↓</span></div>
-      <div class="td">
+    <div class="threat-card" onclick="toggleCard(this)">
+      <span class="threat-icon">🎣</span>
+      <span class="danger-tag danger-high">Высокий риск</span>
+      <div class="threat-title">Фишинг</div>
+      <div class="threat-short">Мошеннические письма и сайты, которые маскируются под настоящие, чтобы украсть твои данные.</div>
+      <div class="threat-expand">Подробнее →</div>
+      <div class="threat-details">
         <h4>Как распознать</h4>
         <ul>
-          <li>Срочность: «аккаунт заблокируют через 24 часа»</li>
-          <li>Чужой домен отправителя: sber-bank@mail.ru</li>
-          <li>Ссылка искажена: g00gle.com, vk-login.net</li>
+          <li>Срочность: «Аккаунт заблокируют через 24 часа»</li>
+          <li>Подозрительный адрес отправителя: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="63100106114e01020d08230e020a0f4d1116">[email&#160;protected]</a> вместо sberbank.ru</li>
+          <li>Ссылки ведут на странные домены (goog1e.com, vk-login.net)</li>
           <li>Просят ввести пароль или данные карты</li>
         </ul>
-        <h4>Как защититься</h4>
+        <h4 style="margin-top:1rem">Как защититься</h4>
         <ul>
-          <li>Проверяй URL в адресной строке браузера</li>
-          <li>Не переходи по ссылкам из писем — набирай адрес вручную</li>
+          <li>Всегда проверяй адрес сайта в строке браузера</li>
+          <li>Не переходи по ссылкам из подозрительных писем</li>
           <li>Включи двухфакторную аутентификацию</li>
-          <li>При сомнениях звони в организацию напрямую</li>
+          <li>Позвони в организацию напрямую, если сомневаешься</li>
         </ul>
       </div>
     </div>
 
-    <div class="tcard" onclick="togT(this)">
-      <svg class="tsvg" viewBox="0 0 80 80" fill="none">
-        <circle cx="40" cy="40" r="18" fill="rgba(123,97,255,0.1)" stroke="#7b61ff" stroke-width="1.5"/>
-        <circle cx="40" cy="40" r="9" fill="rgba(123,97,255,0.18)" stroke="#7b61ff" stroke-width="1.1"/>
-        <line x1="22" y1="30" x2="13" y2="22" stroke="#7b61ff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-        <line x1="22" y1="40" x2="11" y2="40" stroke="#7b61ff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-        <line x1="22" y1="50" x2="13" y2="58" stroke="#7b61ff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-        <line x1="58" y1="30" x2="67" y2="22" stroke="#7b61ff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-        <line x1="58" y1="40" x2="69" y2="40" stroke="#7b61ff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-        <line x1="58" y1="50" x2="67" y2="58" stroke="#7b61ff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-        <circle cx="35" cy="37" r="2.5" fill="#7b61ff"/>
-        <circle cx="45" cy="37" r="2.5" fill="#7b61ff"/>
-        <path d="M33 46 Q40 50 47 46" stroke="#7b61ff" stroke-width="1.3" stroke-linecap="round" fill="none"/>
-      </svg>
-      <span class="dtag dh">Высокий риск</span>
-      <div class="ttitle">Вредоносное ПО</div>
-      <div class="tshort">Вирусы, трояны, шифровальщики и стилеры — крадут данные или блокируют устройство.</div>
-      <div class="texp">Подробнее <span class="tarr">↓</span></div>
-      <div class="td">
-        <h4>Типы угроз</h4>
+    <div class="threat-card" onclick="toggleCard(this)">
+      <span class="threat-icon">🦠</span>
+      <span class="danger-tag danger-high">Высокий риск</span>
+      <div class="threat-title">Вредоносные программы</div>
+      <div class="threat-short">Вирусы, трояны и шпионское ПО, которые проникают в устройство и крадут данные или деньги.</div>
+      <div class="threat-expand">Подробнее →</div>
+      <div class="threat-details">
+        <h4>Типы вредоносов</h4>
         <ul>
+          <li>Вирусы — самокопирующиеся программы, повреждающие файлы</li>
           <li>Трояны — маскируются под полезные программы</li>
           <li>Шифровальщики — блокируют файлы и требуют выкуп</li>
-          <li>Стилеры — крадут пароли из браузера</li>
-          <li>Шпионское ПО — тайно следит за действиями</li>
+          <li>Шпионское ПО — следят за твоими действиями</li>
         </ul>
-        <h4>Как защититься</h4>
+        <h4 style="margin-top:1rem">Как защититься</h4>
         <ul>
-          <li>Скачивай только из официальных источников</li>
-          <li>Регулярно обновляй антивирус и ОС</li>
+          <li>Устанавливай программы только из официальных источников</li>
+          <li>Используй антивирус и обновляй его</li>
           <li>Не открывай вложения из неизвестных писем</li>
-          <li>Делай резервные копии важных файлов</li>
+          <li>Регулярно делай резервные копии файлов</li>
         </ul>
       </div>
     </div>
 
-    <div class="tcard" onclick="togT(this)">
-      <svg class="tsvg" viewBox="0 0 80 80" fill="none">
-        <!-- Theatre masks - social engineering -->
-        <ellipse cx="28" cy="38" rx="16" ry="18" fill="rgba(255,179,0,0.1)" stroke="#ffb300" stroke-width="1.5"/>
-        <ellipse cx="52" cy="38" rx="16" ry="18" fill="rgba(255,59,107,0.1)" stroke="#ff3b6b" stroke-width="1.5"/>
-        <circle cx="23" cy="34" r="2.5" fill="#ffb300" opacity=".8"/>
-        <circle cx="33" cy="34" r="2.5" fill="#ffb300" opacity=".8"/>
-        <path d="M22 43 Q28 47 34 43" stroke="#ffb300" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-        <circle cx="47" cy="34" r="2.5" fill="#ff3b6b" opacity=".8"/>
-        <circle cx="57" cy="34" r="2.5" fill="#ff3b6b" opacity=".8"/>
-        <path d="M46 46 Q52 42 58 46" stroke="#ff3b6b" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-        <line x1="28" y1="20" x2="28" y2="14" stroke="#ffb300" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>
-        <line x1="52" y1="20" x2="52" y2="14" stroke="#ff3b6b" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>
-      </svg>
-      <span class="dtag dh">Высокий риск</span>
-      <div class="ttitle">Социальная инженерия</div>
-      <div class="tshort">Психологические манипуляции — тебя вынуждают самого раскрыть секретную информацию.</div>
-      <div class="texp">Подробнее <span class="tarr">↓</span></div>
-      <div class="td">
+    <div class="threat-card" onclick="toggleCard(this)">
+      <span class="threat-icon">🎭</span>
+      <span class="danger-tag danger-high">Высокий риск</span>
+      <div class="threat-title">Социальная инженерия</div>
+      <div class="threat-short">Психологические манипуляции, которые вынуждают тебя самого раскрыть секретную информацию.</div>
+      <div class="threat-expand">Подробнее →</div>
+      <div class="threat-details">
         <h4>Популярные схемы</h4>
         <ul>
-          <li>«Служба безопасности банка» — просят CVV и код из SMS</li>
-          <li>«Ты выиграл приз» — просят оплатить комиссию</li>
-          <li>«Мама, я в беде» — просят срочный перевод</li>
-          <li>Фейковые профили знакомых в соцсетях</li>
+          <li>«Служба безопасности банка» — звонят, просят назвать CVV</li>
+          <li>«Ты выиграл приз» — просят заплатить комиссию</li>
+          <li>«Мама/папа, я попал в беду» — требуют перевод денег</li>
+          <li>Фейковые страницы знакомых в соцсетях</li>
         </ul>
-        <h4>Как защититься</h4>
+        <h4 style="margin-top:1rem">Как защититься</h4>
         <ul>
-          <li>Никогда и никому не называй коды из SMS</li>
-          <li>Перезвони близкому сам по известному номеру</li>
-          <li>Мошенники торопят специально — не торопись в ответ</li>
+          <li>Никогда не называй пароли и коды из SMS</li>
+          <li>Перезвони близкому сам, не по номеру из сообщения</li>
+          <li>Банки никогда не просят данные карты по телефону</li>
+          <li>Обдумывай решения — мошенники торопят специально</li>
         </ul>
       </div>
     </div>
 
-    <div class="tcard" onclick="togT(this)">
-      <svg class="tsvg" viewBox="0 0 80 80" fill="none">
-        <!-- Server under DDoS -->
-        <rect x="20" y="24" width="40" height="10" rx="3" fill="rgba(0,229,255,0.07)" stroke="#00e5ff" stroke-width="1.3"/>
-        <rect x="20" y="38" width="40" height="10" rx="3" fill="rgba(0,229,255,0.07)" stroke="#00e5ff" stroke-width="1.3"/>
-        <rect x="20" y="52" width="40" height="10" rx="3" fill="rgba(0,229,255,0.07)" stroke="#00e5ff" stroke-width="1.3"/>
-        <circle cx="54" cy="29" r="2" fill="#28c840"/>
-        <circle cx="54" cy="43" r="2" fill="#ffb300"/>
-        <circle cx="54" cy="57" r="2" fill="#ff3b6b"/>
-        <!-- incoming attack arrows -->
-        <path d="M8 12 L22 26" stroke="#ff3b6b" stroke-width="1.4" stroke-linecap="round" marker-end="url(#arr)" opacity=".7"/>
-        <path d="M15 8 L23 24" stroke="#ff3b6b" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>
-        <path d="M24 6 L26 22" stroke="#ff3b6b" stroke-width="1.4" stroke-linecap="round" opacity=".4"/>
-        <path d="M35 5 L35 22" stroke="#ff3b6b" stroke-width="1.4" stroke-linecap="round" opacity=".6"/>
-        <path d="M46 6 L44 22" stroke="#ff3b6b" stroke-width="1.4" stroke-linecap="round" opacity=".4"/>
-        <path d="M57 8 L47 23" stroke="#ff3b6b" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>
-        <path d="M65 13 L52 25" stroke="#ff3b6b" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
-      </svg>
-      <span class="dtag dm">Средний риск</span>
-      <div class="ttitle">DDoS-атаки</div>
-      <div class="tshort">Перегрузка серверов тысячами запросов — сайты и сервисы выходят из строя.</div>
-      <div class="texp">Подробнее <span class="tarr">↓</span></div>
-      <div class="td">
-        <h4>Как работает</h4>
+    <div class="threat-card" onclick="toggleCard(this)">
+      <span class="threat-icon">💀</span>
+      <span class="danger-tag danger-med">Средний риск</span>
+      <div class="threat-title">DDoS-атаки</div>
+      <div class="threat-short">Перегрузка серверов потоком запросов, которая выводит сайты и сервисы из строя.</div>
+      <div class="threat-expand">Подробнее →</div>
+      <div class="threat-details">
+        <h4>Как это работает</h4>
         <ul>
-          <li>Тысячи заражённых устройств атакуют сервер одновременно</li>
-          <li>Твой ПК может быть частью ботнета без твоего ведома</li>
-          <li>В 2025 г. кибератаки на инфраструктуру РФ выросли в 4 раза</li>
+          <li>Тысячи заражённых устройств одновременно обращаются к серверу</li>
+          <li>Сервер не выдерживает нагрузку и падает</li>
+          <li>Твой компьютер может быть частью такой сети без твоего ведома</li>
         </ul>
-        <h4>Как защититься</h4>
+        <h4 style="margin-top:1rem">Как защититься</h4>
         <ul>
-          <li>Не устанавливай пиратский софт — он часто несёт трояны</li>
-          <li>Обновляй ОС и программы</li>
-          <li>Используй брандмауэр</li>
+          <li>Не устанавливай пиратский софт — он часто содержит трояны-ботов</li>
+          <li>Обновляй операционную систему и программы</li>
+          <li>Используй брандмауэр (файрвол)</li>
         </ul>
       </div>
     </div>
 
-    <div class="tcard" onclick="togT(this)">
-      <svg class="tsvg" viewBox="0 0 80 80" fill="none">
-        <!-- Lock with key -->
-        <rect x="18" y="34" width="44" height="32" rx="5" fill="rgba(0,229,255,0.07)" stroke="#00e5ff" stroke-width="1.5"/>
-        <path d="M26 34 L26 26 C26 16 54 16 54 26 L54 34" stroke="#00e5ff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <circle cx="40" cy="50" r="7" fill="rgba(0,229,255,0.15)" stroke="#00e5ff" stroke-width="1.3"/>
-        <line x1="40" y1="50" x2="40" y2="57" stroke="#00e5ff" stroke-width="2" stroke-linecap="round"/>
-        <!-- crack / breach -->
-        <path d="M40 13 L36 20 L41 23 L37 30" stroke="#ff3b6b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
-        <circle cx="37" cy="30" r="2" fill="#ff3b6b" opacity=".7"/>
-      </svg>
-      <span class="dtag dh">Высокий риск</span>
-      <div class="ttitle">Кража личных данных</div>
-      <div class="tshort">Данные собирают из утечек — чтобы действовать от твоего имени или шантажировать.</div>
-      <div class="texp">Подробнее <span class="tarr">↓</span></div>
-      <div class="td">
+    <div class="threat-card" onclick="toggleCard(this)">
+      <span class="threat-icon">🔐</span>
+      <span class="danger-tag danger-high">Высокий риск</span>
+      <div class="threat-title">Кража личных данных</div>
+      <div class="threat-short">Преступники собирают твои личные данные, чтобы совершать преступления от твоего имени.</div>
+      <div class="threat-expand">Подробнее →</div>
+      <div class="threat-details">
         <h4>Что крадут</h4>
         <ul>
           <li>Логины и пароли от аккаунтов</li>
@@ -556,411 +160,62 @@ h1{font-family:'Unbounded',sans-serif;font-size:clamp(1.85rem,5vw,3.7rem);
           <li>Паспортные данные и СНИЛС</li>
           <li>Личные фото и переписку для шантажа</li>
         </ul>
-        <h4>Как защититься</h4>
+        <h4 style="margin-top:1rem">Как защититься</h4>
         <ul>
-          <li>Уникальный пароль для каждого сервиса</li>
-          <li>Двухфакторная аутентификация везде</li>
-          <li>Проверяй утечки: haveibeenpwned.com</li>
+          <li>Используй уникальные пароли для каждого сайта</li>
+          <li>Включи двухфакторную аутентификацию везде, где возможно</li>
           <li>Не публикуй личные данные в открытом доступе</li>
+          <li>Проверяй утечки на haveibeenpwned.com</li>
         </ul>
       </div>
     </div>
 
-    <div class="tcard" onclick="togT(this)">
-      <svg class="tsvg" viewBox="0 0 80 80" fill="none">
-        <!-- AI brain + warning -->
-        <rect x="16" y="22" width="48" height="36" rx="8" fill="rgba(0,255,157,0.07)" stroke="#00ff9d" stroke-width="1.5"/>
-        <rect x="26" y="32" width="10" height="7" rx="3" fill="rgba(0,255,157,0.18)" stroke="#00ff9d" stroke-width="1.2"/>
-        <rect x="44" y="32" width="10" height="7" rx="3" fill="rgba(0,255,157,0.18)" stroke="#00ff9d" stroke-width="1.2"/>
-        <circle cx="31" cy="36" r="2" fill="#00ff9d"/>
-        <circle cx="49" cy="36" r="2" fill="#00ff9d"/>
-        <path d="M28 48 Q40 53 52 48" stroke="#00ff9d" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-        <line x1="40" y1="14" x2="40" y2="22" stroke="#00ff9d" stroke-width="1.8" stroke-linecap="round"/>
-        <circle cx="40" cy="12" r="2.5" fill="#00ff9d" opacity=".7"/>
-        <!-- signal arcs -->
-        <path d="M6 30 Q11 22 11 40 Q11 48 16 40" stroke="#00ff9d" stroke-width="1.1" fill="none" opacity=".4"/>
-        <path d="M74 30 Q69 22 69 40 Q69 48 64 40" stroke="#00ff9d" stroke-width="1.1" fill="none" opacity=".4"/>
-      </svg>
-      <span class="dtag dn">Новая угроза</span>
-      <div class="ttitle">ИИ в руках мошенников</div>
-      <div class="tshort">Дипфейки, голосовые клоны и персонализированный фишинг — ИИ даёт преступникам новые инструменты.</div>
-      <div class="texp">Подробнее <span class="tarr">↓</span></div>
-      <div class="td">
-        <h4>Как используют ИИ</h4>
+    <div class="threat-card" onclick="toggleCard(this)">
+      <span class="threat-icon">🤖</span>
+      <span class="danger-tag danger-high">Новая угроза</span>
+      <div class="threat-title">ИИ в руках мошенников</div>
+      <div class="threat-short">Искусственный интеллект позволяет создавать убедительные дипфейки, голосовые клоны и фишинг нового уровня.</div>
+      <div class="threat-expand">Подробнее →</div>
+      <div class="threat-details">
+        <h4>Как мошенники используют ИИ</h4>
         <ul>
           <li>Дипфейк-видео: подделывают лица и голоса</li>
-          <li>Голосовые клоны: звонят «голосом» твоих близких</li>
-          <li>Персонализированные письма: знают твоё имя и детали</li>
-          <li>Чат-боты для массового обмана в мессенджерах</li>
+          <li>Голосовые клоны: звонят голосом твоих родственников</li>
+          <li>Персонализированные фишинговые письма</li>
+          <li>Автоматические чат-боты-мошенники</li>
         </ul>
-        <h4>Как защититься</h4>
+        <h4 style="margin-top:1rem">Как защититься</h4>
         <ul>
-          <li>Придумай с семьёй секретное кодовое слово</li>
-          <li>Необычный звонок или видео — повод насторожиться</li>
-          <li>Проверяй важную информацию из нескольких источников</li>
+          <li>Придумай с семьёй кодовое слово для проверки</li>
+          <li>Видеозвонок в незнакомом контексте — повод насторожиться</li>
+          <li>Проверяй информацию из нескольких источников</li>
         </ul>
       </div>
     </div>
 
   </div>
   <div style="text-align:center">
-    <button class="btnp" onclick="go('sim')">Перейти к симулятору →</button>
+    <button class="btn-primary" onclick="showSection('simulator')">Попробовать симулятор →</button>
   </div>
 </div>
 
-<!-- ══════════ SIMULATOR ══════════ -->
-<div id="sim" class="sec">
-  <div class="stitle">Симулятор угроз</div>
-  <div class="ssub">Ты бы попался? 15 реальных схем мошенников — разбери каждую</div>
-  <div id="simW" style="max-width:660px;margin:0 auto">
-    <div class="spb" id="pb"></div>
-    <div id="simC"></div>
+<!-- SIMULATOR -->
+<div id="simulator" class="section">
+  <div class="section-title">Симулятор угроз</div>
+  <div class="section-sub">Проверь — ты бы попался? Разбери реальные схемы мошенников</div>
+  <div class="sim-container">
+    <div class="sim-progress" id="simProgress"></div>
+    <div id="simContent"></div>
   </div>
 </div>
 
-<!-- ══════════ QUIZ ══════════ -->
-<div id="quiz" class="sec">
-  <div class="stitle">Финальный тест</div>
-  <div class="ssub">12 вопросов — проверь знания о кибербезопасности</div>
-  <div id="qW" style="max-width:620px;margin:0 auto"></div>
+<!-- QUIZ -->
+<div id="quiz" class="section">
+  <div class="section-title">Финальный тест</div>
+  <div class="section-sub">10 вопросов — проверь свои знания о кибербезопасности</div>
+  <div class="quiz-container" id="quizContainer"></div>
 </div>
 
-<script>
-/* ─── PARTICLES ─── */
-(()=>{
-  const c=document.getElementById('cv'),x=c.getContext('2d');
-  let W,H,pts=[];
-  const rz=()=>{W=c.width=innerWidth;H=c.height=innerHeight};
-  rz();addEventListener('resize',rz);
-  const COL=['0,229,255','123,97,255','0,255,157','255,59,107'];
-  class P{
-    constructor(){this.re()}
-    re(){this.x=Math.random()*W;this.y=Math.random()*H;
-      this.vx=(Math.random()-.5)*.27;this.vy=(Math.random()-.5)*.27;
-      this.r=Math.random()*1.3+.4;this.a=Math.random()*.42+.1;
-      this.col=COL[~~(Math.random()*COL.length)]}
-    u(){this.x+=this.vx;this.y+=this.vy;
-      if(this.x<0||this.x>W||this.y<0||this.y>H)this.re()}
-    d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);
-      x.fillStyle=`rgba(${this.col},${this.a})`;x.fill()}
-  }
-  for(let i=0;i<80;i++)pts.push(new P());
-  const ln=()=>{
-    for(let i=0;i<pts.length;i++)
-      for(let j=i+1;j<pts.length;j++){
-        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
-        if(d<108){x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);
-          x.strokeStyle=`rgba(0,229,255,${.05*(1-d/108)})`;x.lineWidth=.5;x.stroke()}}};
-  const lp=()=>{x.clearRect(0,0,W,H);pts.forEach(p=>{p.u();p.d()});ln();requestAnimationFrame(lp)};
-  lp();
-})();
-
-/* ─── HERO ANIM (no counter — static values already in HTML) ─── */
-(()=>{
-  const tl=gsap.timeline({defaults:{ease:'power3.out'}});
-  tl.to('.badge',{opacity:1,y:0,duration:.65,delay:.1})
-    .to('h1',{opacity:1,y:0,duration:.8},'-=.38')
-    .to('.hp',{opacity:1,y:0,duration:.65},'-=.5')
-    .to('.st',{opacity:1,y:0,duration:.5,stagger:.08},'-=.38')
-    .to('.hb',{opacity:1,y:0,duration:.6},'-=.28');
-})();
-
-/* ─── NAV ─── */
-function go(id){
-  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
-  document.querySelectorAll('.nb button').forEach(b=>b.classList.remove('on'));
-  document.getElementById(id).classList.add('on');
-  document.querySelectorAll('.nb button')[['home','threats','sim','quiz'].indexOf(id)].classList.add('on');
-  scrollTo(0,0);
-  if(id==='sim')initSim();
-  if(id==='quiz')initQuiz();
-}
-
-/* ─── THREAT CARDS ─── */
-function togT(c){
-  const e=c.classList.contains('exp');
-  document.querySelectorAll('.tcard').forEach(x=>x.classList.remove('exp'));
-  if(!e)c.classList.add('exp');
-}
-
-/* ─── SIMULATOR DATA ─── */
-const SC=[
-  {type:'email',from:'support@vk-security.net',sub:'Ваш аккаунт ВКонтакте будет заблокирован!',
-   body:`Уважаемый пользователь!\n\nНаша система зафиксировала <span class="hr">подозрительную активность</span>. Подтвердите личность в течение <span class="hr">24 ЧАСОВ</span>.\n\nСсылка: <span class="hr">http://vk-acc0unt-verify.ru/login</span>\n\nС уважением, Служба безопасности ВКонтакте`,
-   q:'Что делаешь с этим письмом?',
-   opts:['Перейду по ссылке — аккаунт важен','Удалю и проверю аккаунт напрямую через vk.com','Перешлю друзьям — нужно предупредить','Отвечу и попрошу объяснений'],
-   c:1,fb:{t:'✓ Правильно! Классический фишинг.',tx:'Домен vk-security.NET ≠ vk.com, ссылка с "0" вместо "о", искусственная срочность. ВКонтакте никогда не пишет с посторонних доменов.',
-   wt:'✗ Это фишинг!',wx:'vk-security.net — не ВКонтакте. Ссылка ведёт на страницу-ловушку. Заходи на сайты только набирая адрес вручную.'}},
-
-  {type:'sms',from:'+7 (900) 123-45-67',sub:'СМС от незнакомого номера',
-   body:`Мама, это я! Потерял телефон, пишу с чужого номера.\n\nСрочно нужно <span class="hr">5 000 рублей</span>. Переведи на карту <span class="hr">2200 **** **** 8821</span>.\n\nВсё объясню потом. <span class="hr">НЕ ЗВОНИ на мой номер</span> — он у чужих.`,
-   q:'Ты мама. Что делаешь?',
-   opts:['Немедленно перевожу — сын в беде','Звоню сыну сам на известный мне номер','Перевожу половину пока не проверю','Пишу в ответ и жду'],
-   c:1,fb:{t:'✓ Правильно! Схема «родственник в беде».',tx:'«Не звони» — главный маркер мошенничества. Всегда звони сам на номер, который ты знаешь.',
-   wt:'✗ Это ловушка!',wx:'«Не звони» — стандартный трюк. Позвони сам на известный тебе номер ребёнка. Паника создаётся намеренно.'}},
-
-  {type:'browser',from:'Всплывающее окно в браузере',sub:'СИСТЕМНОЕ ПРЕДУПРЕЖДЕНИЕ',
-   body:`⚠️ <span class="hr">ВАШ КОМПЬЮТЕР ЗАРАЖЁН!</span>\n\nОбнаружено <span class="hr">5 вирусов</span>, похищающих банковские данные.\n\n📞 Немедленно позвоните:\n<span class="hy">8-800-555-01-99</span>\n\n<span class="hr">НЕ ЗАКРЫВАЙТЕ это окно!</span>`,
-   q:'Ты видишь такое окно в браузере. Твои действия?',
-   opts:['Звоню — нужно спасать данные','Только закрываю вкладку','Закрываю и проверяю своим антивирусом','Перезагружаю ПК'],
-   c:2,fb:{t:'✓ Правильно! Это scareware.',tx:'Сайты не могут «видеть» вирусы на твоём ПК. Закрой вкладку и проверь компьютер своим антивирусом.',
-   wt:'✗ Это scareware — запугивание!',wx:'Звонок приведёт к установке вредоноса или оплате фиктивной «очистки». Закрой окно и проверь антивирусом.'}},
-
-  {type:'email',from:'noreply@gosuslugi-bonus.ru',sub:'Вам начислена выплата 15 480 руб.',
-   body:`Уважаемый гражданин!\n\nВам полагается <span class="hr">социальная выплата 15 480 рублей</span>.\n\n1. Перейдите: <span class="hr">gosuslugi-bonus.ru/get</span>\n2. Введите данные карты\n3. Оплатите комиссию: <span class="hr">450 рублей</span>\n\nСрок: <span class="hy">48 часов</span>`,
-   q:'Как расцениваешь это письмо?',
-   opts:['Оплачу — 450 руб. небольшие, выплата крупная','Это мошенничество — выплаты не требуют комиссий','Проверю на gosuslugi.ru сам','B и C — скорее мошенники, но сначала проверю на официальном сайте'],
-   c:3,fb:{t:'✓ Отлично! Идеальный ответ.',tx:'Левый домен + «заплати чтобы получить деньги» — двойной признак мошенничества. Официальный сайт: gosuslugi.ru.',
-   wt:'✗ Фишинговая ловушка!',wx:'«Заплати чтобы получить» — классика. Введёшь данные карты → потеряешь деньги. Сайт gosuslugi-bonus.ru не имеет отношения к государству.'}},
-
-  {type:'chat',from:'PRO_player_777 в игровом чате',sub:'Личное сообщение',
-   body:`[PRO_player_777]: эй, тебе повезло! раздаём скины топ-игрокам\n\n[PRO_player_777]: зайди на <span class="hr">free-skins-cs.net</span> — войди через Steam и забери\n\n[PRO_player_777]: только быстрее. <span class="hy">уже 2000 игроков получили</span>`,
-   q:'Что делаешь?',
-   opts:['Захожу — хочу скины','Игнорирую: игры не раздают призы через личный чат','Спрашиваю промокод для проверки','Спрашиваю других игроков'],
-   c:1,fb:{t:'✓ Правильно! Steam-фишинг.',tx:'Игровые компании не раздают призы через личные сообщения. free-skins-cs.net создан для кражи аккаунта Steam.',
-   wt:'✗ Это кража аккаунта!',wx:'Сайт имитирует страницу входа в Steam. Введёшь данные — потеряешь аккаунт со всеми скинами.'}},
-
-  {type:'sms',from:'+7 (495) 000-00-01',sub:'СМС от «Сбербанка»',
-   body:`Сбербанк: операция на <span class="hr">47 800 руб.</span> заблокирована.\n\nДля отмены оператор ждёт вашего кода из SMS.\nГорячая линия: <span class="hy">8-800-100-9-100</span>`,
-   q:'Звонит «оператор» и просит назвать код из следующей SMS. Ты:',
-   opts:['Называю код — нужно отменить операцию','Кладу трубку. Сам звоню в банк по номеру на карте','Называю только часть кода','Прошу оператора подождать'],
-   c:1,fb:{t:'✓ Правильно! Никогда не называй коды из SMS.',tx:'Код из SMS — ключ для подтверждения операции. Назовёшь — деньги уйдут к мошенникам. Настоящий банк никогда этого не просит.',
-   wt:'✗ Мошенничество!',wx:'Код из SMS = ключ от твоих денег. Настоящие сотрудники банка никогда не просят этот код. Звони в банк сам.'}},
-
-  {type:'email',from:'admin@vkontakte-prizes.com',sub:'Ваша страница ВК выбрана для проверки',
-   body:`Здравствуйте!\n\nВаш профиль <span class="hg">верифицирован как активный</span> и выбран для программы лояльности.\n\nПолучите <span class="hy">галочку верификации</span> и <span class="hy">500 монет</span>:\n<span class="hr">vkontakte-prizes.com/verify</span>\n\nПредложение: <span class="hr">только 2 часа</span>`,
-   q:'Что происходит на самом деле?',
-   opts:['ВКонтакте раздаёт верификацию через email','Это фишинг — официальный домен только vk.com','Стоит попробовать — верификация бесплатна','Технический сбой'],
-   c:1,fb:{t:'✓ Верно! Официальный домен ВКонтакте — только vk.com.',tx:'vkontakte-prizes.com — фишинговый сайт для кражи пароля. ВКонтакте не рассылает верификацию через email.',
-   wt:'✗ Это фишинг!',wx:'Официальный ВКонтакте: vk.com и vk.ru. Любой другой домен с "vkontakte" в названии — мошенники.'}},
-
-  {type:'browser',from:'Реклама в соцсети',sub:'Рекламное объявление',
-   body:`🔥 <span class="hy">iPhone 16 Pro за 990 рублей!</span>\n\nОсталось: <span class="hr">3 штуки из 100</span>\n\nПрограмма утилизации Apple. Оплати доставку: <span class="hy">990 руб.</span>\n\n⭐⭐⭐⭐⭐ <span class="hg">«Уже получил!» — Алексей М.</span>`,
-   q:'iPhone за 990 руб. с хорошими отзывами. Ты:',
-   opts:['Оплачиваю — 990 руб. небольшой риск','Понимаю, что это невозможно — игнорирую','Ищу информацию о компании в интернете','Спрашиваю у друзей'],
-   c:1,fb:{t:'✓ Правильно! Нереальная цена = обман.',tx:'iPhone 16 Pro стоит более 100 000 руб. Если цена невозможная — это всегда мошенничество. Отзывы поддельные.',
-   wt:'✗ Мошенничество!',wx:'Заплатишь 990 руб. «за доставку» — телефон не придёт, данные карты утекут к мошенникам.'}},
-
-  {type:'chat',from:'Telegram — «Работа онлайн»',sub:'Предложение о работе',
-   body:`Привет! <span class="hg">Удалённая работа</span> — лайкать товары на маркетплейсе.\nПлатим <span class="hy">3 000–8 000 руб./день</span>.\n\nСхема:\n1. Получаешь задание — купить товар\n2. Вносишь свои деньги (<span class="hr">от 5 000 руб.</span>)\n3. Возвращаем + комиссия\n\nПервые задания без вложений!`,
-   q:'Что происходит на самом деле?',
-   opts:['Легальная удалённая работа','Мошенническая схема — в итоге попросят внести деньги и исчезнут','Стоит попробовать первые «бесплатные» задания','Уточню детали перед тем как решать'],
-   c:1,fb:{t:'✓ Правильно! Схема «работа на маркетплейсе».',tx:'Сначала дают мелкий «заработок» без вложений — приманка. Потом суммы вложений растут, деньги зависают, просят внести ещё.',
-   wt:'✗ Мошенническая схема!',wx:'Легальная работа не требует вносить собственные деньги. «Бесплатные задания» — способ завоевать доверие перед обманом.'}},
-
-  {type:'email',from:'security@mail-google.net',sub:'Срочно: вход в аккаунт Google из Нигерии',
-   body:`Уважаемый пользователь!\n\nВход из <span class="hr">необычного местоположения: Нигерия</span>.\n\nСмените пароль немедленно:\n<span class="hr">http://mail-google.net/security/reset</span>\n\n<span class="hy">Не ответите за 12 часов — аккаунт заморожен.</span>\n\nGoogle Security Team`,
-   q:'Получил такое письмо. Как действуешь?',
-   opts:['Перехожу по ссылке и меняю пароль','Игнорирую ссылку — открываю новую вкладку и иду на accounts.google.com','Отвечаю «НЕТ» на письмо','Звоню в техподдержку Google'],
-   c:1,fb:{t:'✓ Правильно! Всегда заходи напрямую.',tx:'mail-google.net — поддельный домен. Официальный Google: google.com. Никогда не переходи по ссылкам из писем о безопасности.',
-   wt:'✗ Фишинг под Google!',wx:'mail-google.net — ловушка. Введёшь пароль — он окажется у мошенников. Всегда набирай адрес вручную в новой вкладке.'}},
-
-  {type:'sms',from:'+7 (900) 555-12-34',sub:'Сообщение в мессенджере',
-   body:`Привет, я из группы взаимопомощи. Нашла твой контакт.\n\nМне нужна помощь — ребёнок в больнице, не хватает <span class="hr">3 000 руб.</span> на лекарства.\n\nПереведи: <span class="hr">2202 **** **** 6614</span>\nВерну через три дня 🙏`,
-   q:'Незнакомая просит деньги на ребёнка в больнице. Ты:',
-   opts:['Перевожу — ребёнок в больнице, это срочно','Уточняю кто это и откуда мой контакт — скорее всего мошенник','Прошу прислать фото документов из больницы','Перевожу половину суммы'],
-   c:1,fb:{t:'✓ Правильно! «Незнакомец в беде» — распространённая схема.',tx:'Незнакомые люди с историей о беде и просьбой перевести деньги — классическое мошенничество в мессенджерах.',
-   wt:'✗ Это мошенничество!',wx:'Мошенники создают эмоциональное давление через истории о детях. Деньги уйдут безвозвратно, никакого ребёнка нет.'}},
-
-  {type:'email',from:'lottery@vk-prize2025.ru',sub:'Вы выиграли в лотерее ВКонтакте!',
-   body:`Поздравляем!\n\nВаш аккаунт ВКонтакте выбран случайным образом.\n\n<span class="hg">Ваш приз: 50 000 рублей</span>\n\nДля получения:\n1. Перейдите: <span class="hr">vk-prize2025.ru/claim</span>\n2. Оплатите налог на выигрыш: <span class="hr">1 300 рублей</span>\n\nСрок: <span class="hy">72 часа</span>`,
-   q:'Ты получил такое письмо. Что происходит?',
-   opts:['Оплачу налог — 1 300 руб. ради 50 000 стоит','Это мошенничество — лотерей ВКонтакте не существует','Проверю официальный сайт ВКонтакте','Спрошу у друзей — вдруг реально'],
-   c:1,fb:{t:'✓ Правильно! «Лотерея с налогом» — ловушка.',tx:'Легальные лотереи не берут налог через сторонние сайты. ВКонтакте не проводит денежных лотерей через email.',
-   wt:'✗ Это мошенничество!',wx:'Заплатишь 1 300 руб. → появится «новая комиссия» → ещё одна. Тебя будут доить дальше до отказа.'}},
-
-  {type:'chat',from:'«Инвестиционный клуб» в Telegram',sub:'Приглашение в закрытый чат',
-   body:`Привет! Ты добавлен в закрытый инвестиционный клуб.\n\n<span class="hg">Минимальный вход: 10 000 руб.</span>\nСредняя доходность: <span class="hy">+35% в месяц</span>\n\n847 участников. Вывод в любой момент.\nАдмин @crypto_prof покажет схему.`,
-   q:'Тебе предлагают «инвестиции» с доходностью 35% в месяц. Ты:',
-   opts:['Вхожу — хочу зарабатывать','Отказываюсь: 35% в месяц — признак финансовой пирамиды','Вкладываю минимальную сумму для проверки','Прошу показать отчёты участников'],
-   c:1,fb:{t:'✓ Правильно! 35% в месяц — финансовая пирамида.',tx:'Реальная доходность фондового рынка: 10–15% в год. 35% в месяц физически невозможно.',
-   wt:'✗ Это финансовая пирамида!',wx:'Первым участникам платят из денег новых. Потом организаторы исчезают. Любая «гарантированная» сверхдоходность — мошенничество.'}},
-
-  {type:'browser',from:'QR-код на объявлении в подъезде',sub:'Вы отсканировали QR-код',
-   body:`УПРАВЛЯЮЩАЯ КОМПАНИЯ\nОАО «ЖКХ Сервис»\n\n<span class="hy">Уважаемый жилец!</span>\n\nВаш лицевой счёт: задолженность <span class="hr">4 850 рублей</span>.\n\nОплатите до 30 числа через нашу форму:\n<span class="hr">zhkh-servis-oplata.ru/pay</span>\n\nВведите данные карты для оплаты.`,
-   q:'Ты отсканировал QR в подъезде и попал на этот сайт. Что делаешь?',
-   opts:['Оплачиваю — задолженность нужно погасить','Закрываю. Проверяю задолженность через официальное приложение своей УК','Ввожу только номер карты без CVV','Перехожу на сайт и осматриваюсь — может всё нормально'],
-   c:1,fb:{t:'✓ Правильно! QR-коды в подъездах могут вести на мошеннические сайты.',tx:'Мошенники наклеивают поддельные объявления с QR-кодами. Всегда проверяй задолженность через официальное приложение своей УК.',
-   wt:'✗ Это фишинговый QR-код!',wx:'zhkh-servis-oplata.ru — не официальный сайт. Введёшь данные карты — потеряешь деньги. Проверяй задолженность в официальном приложении или на сайте своей УК.'}},
-
-  {type:'chat',from:'«Официальный» Telegram-бот',sub:'Сообщение от бота',
-   body:`Уважаемый пользователь!\n\nВаш паспорт требует <span class="hr">обязательного обновления</span> в базе МФЦ.\n\n✅ Пройдите верификацию:\n<span class="hr">Отправьте фото паспорта боту</span>\n\nБез верификации документы могут быть аннулированы через <span class="hr">7 дней</span>.`,
-   q:'Telegram-бот просит прислать фото паспорта. Ты:',
-   opts:['Отправляю — нужно обновить документы','Никогда не отправляю паспорт в мессенджерах — это мошенничество','Отправляю только первый разворот','Уточняю у бота зачем это нужно'],
-   c:1,fb:{t:'✓ Правильно! Паспорт в мессенджерах не отправляют никогда.',tx:'Государственные органы не запрашивают документы через Telegram. Фото паспорта используют для оформления кредитов на твоё имя.',
-   wt:'✗ Кража паспортных данных!',wx:'Фото паспорта = твоя личность. Мошенники оформят на тебя кредиты или продадут данные. Государство работает через МФЦ и gosuslugi.ru, не через Telegram.'}}
-];
-
-let si=0, sAnswered=false;
-function initSim(){si=0;sAnswered=false;renderSim()}
-
-function renderSim(){
-  document.getElementById('pb').innerHTML=
-    SC.map((_,i)=>`<div class="spbs ${i<si?'done':i===si?'curr':''}"></div>`).join('');
-  if(si>=SC.length){
-    document.getElementById('simC').innerHTML=`
-      <div style="text-align:center;padding:3rem 1rem">
-        <svg width="72" height="72" viewBox="0 0 72 72" fill="none" style="margin-bottom:1rem">
-          <path d="M36 6L9 21L9 40C9 53 21 63 36 66C51 63 63 53 63 40L63 21Z" fill="rgba(0,255,157,0.08)" stroke="#00ff9d" stroke-width="2"/>
-          <path d="M25 36L32 43L47 28" stroke="#28c840" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div class="stitle" style="margin-bottom:.5rem">Симулятор пройден!</div>
-        <p style="color:var(--dim);margin-bottom:2rem;max-width:380px;margin-inline:auto">Ты разобрал 15 реальных схем мошенников. Готов к финальному тесту?</p>
-        <button class="btnp" onclick="go('quiz')">Пройти финальный тест →</button>
-      </div>`;
-    return;
-  }
-  const s=SC[si];
-  const icons={email:'📧 Email',sms:'💬 SMS / Мессенджер',browser:'🌐 Браузер / Реклама',chat:'💬 Чат / Telegram'};
-  document.getElementById('simC').innerHTML=`
-    <div class="scard">
-      <div class="stbar">
-        <div class="wd wr2"></div><div class="wd wy2"></div><div class="wd wg2"></div>
-        <span class="sttl">${icons[s.type]||s.type}</span>
-        <span class="sfr">От: ${s.from}</span>
-      </div>
-      <div class="sbdy">
-        <div class="ssub2">${s.sub}</div>
-        <div class="smsg">${s.body}</div>
-        <div class="sctr">Ситуация ${si+1} из ${SC.length}</div>
-        <div class="sq">${s.q}</div>
-        <div class="sopts">${s.opts.map((o,i)=>`
-          <button class="sopt" onclick="ansS(${i})" id="so${i}">
-            <span class="olbl">${String.fromCharCode(65+i)}</span>${o}
-          </button>`).join('')}
-        </div>
-        <div class="sfb" id="sfb"></div>
-      </div>
-    </div>
-    <div id="snav" style="display:none" class="snav">
-      <button class="btnp" onclick="nxtS()">
-        ${si<SC.length-1?'Следующая ситуация →':'Завершить симулятор →'}
-      </button>
-    </div>`;
-}
-
-function ansS(i){
-  if(sAnswered)return;
-  sAnswered=true;
-  const s=SC[si], ok=(i===s.c);
-  document.querySelectorAll('.sopt').forEach((b,j)=>{
-    b.disabled=true;
-    if(j===s.c) b.classList.add('oka');
-    else if(j===i && !ok) b.classList.add('erra');
-  });
-  const fb=document.getElementById('sfb');
-  /* KEY FIX: set display:block BEFORE GSAP so it animates in and STAYS visible */
-  fb.className=`sfb vis ${ok?'fok':'ferr'}`;
-  fb.innerHTML=`<div class="fbt" style="color:${ok?'#2dcc44':'var(--r)'}">${ok?s.fb.t:s.fb.wt}</div>`+
-               `<div style="color:var(--dim);margin-top:.3rem">${ok?s.fb.tx:s.fb.wx}</div>`;
-  gsap.fromTo(fb,{opacity:0,y:10},{opacity:1,y:0,duration:.38,ease:'power2.out'});
-  document.getElementById('snav').style.display='flex';
-}
-
-function nxtS(){sAnswered=false;si++;renderSim()}
-
-/* ─── QUIZ ─── */
-const QS=[
-  {q:'Ты получил письмо от «Сбербанка» с просьбой подтвердить данные карты. Адрес отправителя: sber-online@gmail.com. Это:',
-   opts:['Обычное письмо от банка','Фишинговая атака','Техническое уведомление','Реклама'],c:1},
-  {q:'Какой пароль наиболее безопасный?',
-   opts:['qwerty123','дата_рождения','K!berZащит@2025','имя+год'],c:2},
-  {q:'Что такое двухфакторная аутентификация?',
-   opts:['Два разных пароля','Подтверждение входа вторым способом — SMS или приложение','Новый тип антивируса','Шифрование файлов'],c:1},
-  {q:'По данным Генпрокуратуры, в 2025 году в России зафиксировано IT-преступлений:',
-   opts:['Около 300 тысяч','Около 500 тысяч','Около 675 тысяч','Более 1 миллиона'],c:2},
-  {q:'Незнакомый в игровом чате предлагает скины — нужно войти через его сайт. Это:',
-   opts:['Честный подарок','Попытка украсть аккаунт','Официальная акция игры','Технический тест'],c:1},
-  {q:'Ты скачал программу с торрента. Антивирус молчит. Это безопасно?',
-   opts:['Да, раз антивирус не среагировал','Нет — пиратский софт часто содержит вредоносы которые антивирус не всегда видит','Безопасно если программа популярная','Зависит от ОС'],c:1},
-  {q:'«Служба безопасности банка» просит назвать код из SMS. Ты:',
-   opts:['Называю — они из банка','Кладу трубку и перезваниваю в банк сам по номеру на карте','Называю только часть кода','Прошу подождать'],c:1},
-  {q:'Telegram-бот просит прислать фото паспорта для «верификации». Ты:',
-   opts:['Отправляю — нужно для документов','Никогда не отправляю паспорт в мессенджерах — это мошенничество','Отправляю только первый разворот','Сначала уточняю у бота'],c:1},
-  {q:'Тебе предлагают инвестиции с доходностью 35% в месяц. Это:',
-   opts:['Выгодное предложение','Признак финансовой пирамиды','Зависит от компании','Нормально для крипты'],c:1},
-  {q:'Что означает «https» в начале адреса сайта?',
-   opts:['Сайт создан в России','Соединение зашифровано — данные труднее перехватить','Сайт проверен государством','Сайт без вирусов'],c:1},
-  {q:'Средний ущерб от кибератак в 2025 году по сравнению с 2024-м:',
-   opts:['Снизился','Остался прежним','Вырос примерно на 5%','Вырос в 3 раза'],c:2},
-  {q:'Публичный Wi-Fi в кафе. Что делать безопасно?',
-   opts:['Вводить пароли и данные карты','Делать банковские переводы','Читать новости и смотреть видео без ввода паролей','Всё вышеперечисленное'],c:2}
-];
-
-let qA=new Array(QS.length).fill(null), qDone=false;
-function initQuiz(){if(qDone)return;qA=new Array(QS.length).fill(null);renderQuiz()}
-function renderQuiz(){
-  document.getElementById('qW').innerHTML=
-    QS.map((q,qi)=>`
-      <div class="qcard" id="qc${qi}">
-        <div class="qnum">Вопрос ${qi+1} из ${QS.length}</div>
-        <div class="qq">${q.q}</div>
-        <div class="qopts">${q.opts.map((o,oi)=>`
-          <button class="qopt" onclick="selQ(${qi},${oi})" id="qo${qi}_${oi}">
-            <span class="olbl">${String.fromCharCode(65+oi)}</span>${o}
-          </button>`).join('')}</div>
-      </div>`).join('')+
-    `<div class="qsub"><button class="btnp" onclick="subQ()">Проверить результаты →</button></div>`;
-}
-function selQ(qi,oi){
-  if(qDone)return;
-  qA[qi]=oi;
-  document.querySelectorAll(`[id^="qo${qi}_"]`).forEach(b=>b.classList.remove('sel'));
-  document.getElementById(`qo${qi}_${oi}`).classList.add('sel');
-  document.getElementById(`qc${qi}`).classList.add('qa');
-}
-function subQ(){
-  const left=qA.filter(a=>a===null).length;
-  if(left>0){alert(`Ответь на все вопросы. Осталось: ${left}`);return}
-  qDone=true;
-  let score=0;
-  QS.forEach((q,qi)=>{
-    const ua=qA[qi];
-    if(ua===q.c)score++;
-    document.querySelectorAll(`[id^="qo${qi}_"]`).forEach(b=>{
-      b.disabled=true;
-      const oi=+b.id.split('_')[1];
-      if(oi===q.c) b.classList.add('qok');
-      else if(oi===ua&&ua!==q.c) b.classList.add('qerr');
-    });
-  });
-  setTimeout(()=>showRes(score),320);
-}
-function showRes(s){
-  const p=s/QS.length;
-  let ti,de,co;
-  if(p>=.9){ti='Эксперт по кибербезопасности!';de='Отличный результат. Ты отлично знаешь угрозы и методы защиты. Поделись сайтом с друзьями и родителями!';co='var(--ac)'}
-  else if(p>=.75){ti='Хороший уровень защиты';de='Большинство угроз знаешь. Повтори темы в которых ошибся — они встречаются в реальной жизни чаще всего.';co='var(--p)'}
-  else if(p>=.5){ti='Средний уровень';de='Базовые знания есть, но мошенники могут тебя перехитрить. Пройди симулятор заново и изучи карточки угроз.';co='var(--y)'}
-  else{ti='Нужно подтянуть знания';de='Не расстраивайся — теперь знаешь о чём читать. Изучи все разделы и вернись к тесту!';co='var(--r)'}
-
-  document.getElementById('qW').innerHTML=`
-    <div class="rbox">
-      <div class="rring" style="border-color:${co};box-shadow:0 0 30px ${co}28">
-        <span class="rnum" style="color:${co}">${s}</span>
-        <span class="rof">из ${QS.length}</span>
-      </div>
-      <div class="rtitle">${ti}</div>
-      <div class="rdesc">${de}</div>
-      <div class="tbox">
-        <h4>Ключевые правила защиты</h4>
-        ${[['🔑','Уникальный пароль для каждого сервиса — используй менеджер паролей'],
-           ['📱','Включи двухфакторную аутентификацию в Telegram, ВКонтакте и почте'],
-           ['🧠','Торопят принять решение? Это главный признак мошенничества'],
-           ['🔗','Набирай адрес сайта вручную — не переходи по ссылкам из писем'],
-           ['🪪','Никогда не отправляй фото паспорта в мессенджерах'],
-           ['👨‍👩‍👧','Расскажи родителям о схемах мошенников — они чаще становятся жертвами']
-          ].map(([i,t])=>`<div class="trow"><span class="tico2">${i}</span><span>${t}</span></div>`).join('')}
-      </div>
-      <div class="bgrp">
-        <button class="btnp" onclick="retryQ()">Пройти тест заново</button>
-        <button class="btns" onclick="go('threats')">Повторить теорию</button>
-      </div>
-    </div>`;
-  gsap.from('.rring',{scale:.4,opacity:0,duration:.8,ease:'back.out(1.7)'});
-  gsap.from('.rtitle,.rdesc,.tbox,.bgrp',{y:20,opacity:0,stagger:.1,duration:.6,delay:.45});
-}
-function retryQ(){qDone=false;qA=new Array(QS.length).fill(null);renderQuiz()}
-</script>
+<script src="script.js"></script>
 </body>
 </html>
