@@ -794,12 +794,36 @@ nav {
    АДАПТИВ
    ============================================================ */
 @media (max-width: 768px) {
-  nav { padding: 0 1.1rem; height: 64px; }
-  .nav-logo { font-size: 1rem; }
-  .nav-links { gap: 0.2rem; }
+  nav {
+    padding: 0;
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-logo {
+    font-size: 1rem;
+    padding: 0.75rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-links {
+    gap: 0.2rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    padding: 0.45rem 0.75rem;
+    flex-wrap: nowrap;
+  }
+
+  /* Hide scrollbar visually on WebKit (Chrome/Safari) */
+  .nav-links::-webkit-scrollbar { display: none; }
+
   .nav-links button {
-    font-size: 0.92rem;
-    padding: 0.5rem 0.85rem;
+    font-size: 0.88rem;
+    padding: 0.45rem 0.9rem;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .section { padding: 2rem 1rem 3rem; }
   .hero { padding: 2.5rem 0.5rem 2rem; }
